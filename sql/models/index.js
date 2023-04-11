@@ -1,6 +1,20 @@
-import * as models from "."
 import db from "sql/db"
 
-db.sync()
+export * from "./users";
+export * from "./ingredients";
+export * from "./products";
+export * from "./productIngredients";
+export * from "./orders";
+export * from "./orderProducts";
 
-export const Models = models
+console.log("syncing sequelize database")
+
+db.sync({ force: true })
+    .then(() => {
+        console.log('Database schema force updated successfully');
+    })
+    .catch((err) => {
+        console.error('Error updating database schema:', err);
+    });
+
+console.log("sequelize database synced")

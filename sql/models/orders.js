@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize"
 import db from "/sql/db"
 
-export const orders = db.define('v3_orders', {
+const Orders = db.define('v3_orders', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,10 +20,6 @@ export const orders = db.define('v3_orders', {
             min: 0
         }
     },
-
-    created_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
 })
+
+export default Orders

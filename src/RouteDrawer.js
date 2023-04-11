@@ -40,13 +40,13 @@ export default function TemporaryDrawer(props) {
     );
 
     return (
-        <Box sx={{ position: 'fixed', top: 10, left: 10, zIndex: 1 }}>
-            <IconButton sx={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)'}} onClick={toggleDrawer(true)}>
-                <MenuIcon sx={{ height: 36, width: 36}}/>
+        <React.Fragment>
+            <IconButton onClick={toggleDrawer(true)}>
+                <MenuIcon/>
             </IconButton>
             <Drawer anchor={anchor} open={open} onClose={toggleDrawer(false)}>
                 {list()}
             </Drawer>
-        </Box>
+        </React.Fragment>
     )
 }

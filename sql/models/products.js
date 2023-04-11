@@ -1,14 +1,18 @@
 import { Sequelize, DataTypes } from "sequelize"
 import db from "/sql/db"
 
-export const products = db.define('v3_products', {
+const Products = db.define('v3_products', {
     id: {
-        type: DataTypes.SERIAL,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     name: {
         type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    image: {
+        type: DataTypes.BLOB,
         allowNull: false,
     },
     description: {
@@ -36,14 +40,6 @@ export const products = db.define('v3_products', {
         allowNull: false,
         defaultValue: true,
     },
-    created_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
-    updated_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    }
 })
+
+export default Products

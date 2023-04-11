@@ -1,21 +1,30 @@
 import React from 'react';
-import { Box, Container, Typography, Button } from '@mui/material';
-import { useSession, signIn, signOut, getSession } from "next-auth/react"
-import AccountMenu from 'src/AccountMenu';
+
+import { Pagination, Grid, Paper, Box, Button } from '@mui/material'
+import { styled } from '@mui/material/styles';
+import { useRouter } from 'next/router';
+
 import RouteDrawer from 'src/RouteDrawer'
+import StandardAppBar from 'src/StandardAppBar'
+import SearchBar from 'src/SearchBar'
+import IngredientCard from 'src/UpdateInventory/IngredientCard'
 
 export default function UpdateInventory() {
-    const { data: session, status } = useSession()
+    const [data, setData] = React.useState([]);
 
-    // will have map displaying Chick Fil A locations,
-    // will have sign in button or avatar button with drop down to navigate
+    React.useEffect(() => {
+      const fetchData = async () => {
+        const res = await fetch('/api/manage/search');
+        const json = await res.json();
+        setData(json);
+      };
+  
+      fetchData();
+    }, []);
 
-    // avatar with dropdown will be on all pages, dropdown menu will have Home, Order, and Manage options
-    
     return (
         <React.Fragment>
-            <AccountMenu></AccountMenu>
-            <RouteDrawer layout={[
+            <StandardAppBar title="Update Inventory" layout={[
                 [{text: "Home", route: "/Home"}],
                 [{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
                 [  
@@ -23,8 +32,23 @@ export default function UpdateInventory() {
                     {text: "Update Menu", route: "/Manage/UpdateMenu"},
                     {text: "Sales Report", route: "/Manage/SalesReport"},
                 ]
-            ]}>
-            </RouteDrawer>
+            ]}/>
+            
+            <Box sx={{ m: 4, display: 'flex' }}>
+                <SearchBar/>
+                <Button sx={{ml: 2}} variant="outlined">Create</Button>
+            </Box>
+        
+            <Pagination sx={{m: 4}} count={10} variant="outlined" color="primary"/>
+
+            <Box sx={{m: 4}}>
+                <Grid container spacing={2}>
+                    <Grid item xs="auto">
+                        <IngredientCard/>
+                    </Grid>
+                </Grid>
+            </Box>
+
         </React.Fragment>
-    );
+    )
 }

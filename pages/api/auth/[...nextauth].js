@@ -1,6 +1,6 @@
 import NextAuth from "next-auth/next"
 import GoogleProvider from "next-auth/providers/google"
-import users from "sql/models/users"
+import * as Models from "sql/models"
 
 export default NextAuth({
     providers: [
@@ -13,9 +13,9 @@ export default NextAuth({
     secret: process.env.JWT_SECRET,
 
     callbacks: {
-        async signIn(user, account, profile) {
+        async signIn({user}) {
             try {
-                const existingUser = await users.findOne({
+                const existingUser = await Models.Users.findOne({
                     where: {
                         email: user.email
                     }
@@ -25,7 +25,7 @@ export default NextAuth({
                     return true;
 
                 } else {
-                    await users.create({
+                    await Models.Users.create({
                         name: user.name,
                         email: user.email,
                         manager_permissions: true,

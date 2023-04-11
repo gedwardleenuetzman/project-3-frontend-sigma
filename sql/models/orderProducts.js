@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize"
 import db from "/sql/db"
 
-export const orderProducts = db.define('v3_order_products', {
+const OrderProducts = db.define('v3_order_products', {
     order_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -33,3 +33,5 @@ export const orderProducts = db.define('v3_order_products', {
         }
     },
 })
+
+export default OrderProducts

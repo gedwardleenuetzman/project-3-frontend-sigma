@@ -1,7 +1,12 @@
 import { Sequelize, DataTypes } from "sequelize"
 import db from "/sql/db"
   
-export const users = db.define('v3_users', {
+export const Users = db.define('v3_users', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
     name: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -21,3 +26,5 @@ export const users = db.define('v3_users', {
         defaultValue: false,
     }
 });
+
+export default Users
