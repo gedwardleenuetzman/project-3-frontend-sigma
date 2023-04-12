@@ -1,8 +1,6 @@
 import React from 'react';
 
 import { Pagination, Grid, Paper, Box, Button } from '@mui/material'
-import { styled } from '@mui/material/styles';
-import { useRouter } from 'next/router';
 
 import StandardAppBar from 'src/StandardAppBar'
 import SearchBar from 'src/SearchBar'
@@ -14,11 +12,16 @@ export default function UpdateInventory() {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
-	const [dialog, setDialog] = React.useState({mode: "nothing"})
 
     React.useEffect(() => {
       	const fetchContent = async () => {
-			const res = await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { method: "GET" })
+			const res = await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { 
+				method: "GET", 
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+
         	const json = await res.json()
 
         	setContent(json);
@@ -44,14 +47,12 @@ export default function UpdateInventory() {
                     {text: "Sales Report", route: "/Manage/SalesReport"},
                 ]
             ]}/>
-            
-			{dialog.mode != "nothing" && (
-				<IngredientDialog mode={dialog.mode} data={content} open={open} onClose={()=>{setDialog({mode: "nothing"})}}/>
-			)}
+        
+			<IngredientDialog mode={dialog.mode} data={content} open={open} onClose={()=>{setDialog({mode: "nothing"})}}/>
 
             <Box sx={{ m: 4, display: 'flex' }}>
             	<SearchBar onSearch={ setFilter }/>
-                <Button sx={{ ml: 2 }} variant="outlined" onClick={()=>{setDialog({mode: "creating"})}}>Create</Button>
+                <Button sx={{ ml: 2 }} variant="outlined" onClick={()=>{ setDialog({mode: "creating"} )}}>Create</Button>
             </Box>
         
             <Pagination sx={{m: 4}} count={ content.pages } page={ page } onChange={ setPage } variant="outlined" color="primary"/>

@@ -2,12 +2,11 @@ import * as Models from "sql/models"
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const { name, description, image, threshold, quantity } = req.body;
+        const { name, description, threshold, quantity } = req.body;
 
         await Models.Ingredient.create({ 
             name: name,
             description: description,
-            image: image,
             threshold: threshold,
             quantity: quantity,
         });

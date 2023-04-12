@@ -11,10 +11,7 @@ export const Ingredients = db.define('v3_ingredients', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    image: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-    },
+    
     description: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -23,6 +20,7 @@ export const Ingredients = db.define('v3_ingredients', {
     threshold: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 1000,
         validate: {
             min: 0
         }
@@ -30,6 +28,7 @@ export const Ingredients = db.define('v3_ingredients', {
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0,
         validate: {
             min: 0
         }
@@ -41,5 +40,14 @@ export const Ingredients = db.define('v3_ingredients', {
         defaultValue: true,
     },
 })
+
+for (let i = 0; i < 100; i++) {
+    Ingredients.create({
+        name: i,
+        description: "test desc " + i,
+        threshold: (i % 2 == 0) ? 500 : null,
+        quantity: (i * 2),
+    })
+}
 
 export default Ingredients

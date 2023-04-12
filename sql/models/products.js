@@ -11,10 +11,6 @@ export const Products = db.define('v3_products', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    image: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-    },
     description: {
         type: DataTypes.TEXT,
         allowNull: false,
