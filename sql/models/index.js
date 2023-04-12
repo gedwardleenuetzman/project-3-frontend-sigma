@@ -7,14 +7,14 @@ export * from "./productIngredients";
 export * from "./orders";
 export * from "./orderProducts";
 
-console.log("syncing sequelize database")
+// console.log("syncing sequelize database")
 
-db.sync({ force: true })
-    .then(() => {
-        console.log('Database schema force updated successfully');
-    })
-    .catch((err) => {
-        console.error('Error updating database schema:', err);
-    });
+// db.sync({ force: true })
+//     .then(() => {
+//         console.log('Database schema force updated successfully');
+//     })
+//     .catch((err) => {
+//         console.error('Error updating database schema:', err);
+//     });
 
-console.log("sequelize database synced")
+// console.log("sequelize database synced")

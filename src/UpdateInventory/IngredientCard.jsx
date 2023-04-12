@@ -8,13 +8,13 @@ export default function SearchCard(props) {
   return (
     <Card sx={{ display: 'flex' }} >
 
-      <CardMedia component="img" sx={{ width: 150, height: 150 }} image="/static/images/cards/live-from-space.jpg"/>
+      <CardMedia component="img" sx={{ width: 150, height: 150 }} image={ props.image }/>
 
       <Box sx={{ width: 300, height: 150 }}>
 
         <CardContent sx={{ height: 95 }}>
           <Typography variant="h6" component="div"> { props.name } </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary"> { props.desc } </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary"> { props.description } </Typography>
         </CardContent>
 
         <CardActions sx={{ ml: 1 }}>
