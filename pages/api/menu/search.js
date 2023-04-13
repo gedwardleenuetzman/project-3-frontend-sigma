@@ -27,7 +27,7 @@ export default async function handler(req, res) {
             ['description', 'ASC']
         ]
 
-        const result = await Models.Ingredients.findAndCountAll({
+        const result = await Models.Products.findAndCountAll({
             where: whereClause, 
             order: orderClause,
             limit: PAGE_SIZE, 

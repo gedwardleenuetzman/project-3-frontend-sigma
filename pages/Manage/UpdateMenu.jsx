@@ -8,7 +8,7 @@ import SearchBar from 'src/SearchBar'
 import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
 
-export default function UpdateInventory() {
+export default function UpdateMenu() {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
@@ -19,7 +19,7 @@ export default function UpdateInventory() {
 
     React.useEffect(() => {
       	const fetchContent = async () => {
-			const res = await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { method: "GET" })
+			const res = await fetch(`/api/manage/menu/search?filter=${ filter }&page=${ page }`, { method: "GET" })
         	const json = await res.json()
 
         	setContent(json);
@@ -32,8 +32,7 @@ export default function UpdateInventory() {
 		{name: "name", type: "text"},
 		{name: "description", type: "text"},
 		{name: "image", type: "text"},
-		{name: "threshold", type: "number"},
-		{name: "quantity", type: "number"},
+		{name: "price", type: "number"},
 	]
 
 	const drawerLayout = [
@@ -53,15 +52,15 @@ export default function UpdateInventory() {
 		let content = {headers: {'Content-Type': 'application/json'}}
 
 		if (mode == "create" && action == "Create") {
-			url = '/api/manage/inventory/create'
+			url = '/api/manage/menu/create'
 			content.method = 'POST'
 			content.body = JSON.stringify({...form})
 		} else if (mode == "edit" && action == "Save") {  
-			url = '/api/manage/inventory/update'
+			url = '/api/manage/menu/update'
 			content.method = 'PUT'
 			content.body = JSON.stringify({...editing, ...form})
 		} else if (mode == "edit" && action == "Delete") {
-			url = '/api/manage/inventory/remove'
+			url = '/api/manage/menu/remove'
 			content.method = 'PUT'
 			content.body = JSON.stringify({id: editing.id})
 		}
@@ -73,7 +72,7 @@ export default function UpdateInventory() {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Update Inventory" layout={ drawerLayout }/>
+            <StandardAppBar title="Update Menu" layout={ drawerLayout }/>
 
 			<DialogForm 
 				open={ open } 
@@ -83,7 +82,11 @@ export default function UpdateInventory() {
 				initial={ mode == "edit" ? editing : {name: "Name", description: "Description", image: "URL", quantity: 0, threshold: 0} }
 				title={ mode == "create" ? "Create Ingredient" : "Edit Ingredient" }
 				actions={ mode == "create" ? ["Create", "Cancel"] : ["Save", "Delete", "Cancel"] }
-			/>
+			>
+
+
+
+			</DialogForm>
 
             <Box sx={{ m: 4, display: 'flex' }}>
             	<SearchBar onSearch={ (val) => setFilter(val) }/>

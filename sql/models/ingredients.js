@@ -11,7 +11,15 @@ export const Ingredients = db.define('v3_ingredients', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    
+    image: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        defaultValue: "https://d1fd34dzzl09j.cloudfront.net/Images/CFACOM/Home%20Page%20Refresh/Home%20Page%20Refresh%20V2/Waffle_Fry_Lifestyle_317x322.png?h=322&w=317&la=en",
+        validate: {
+          isUrl: true
+        }
+    },
+
     description: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -41,13 +49,13 @@ export const Ingredients = db.define('v3_ingredients', {
     },
 })
 
-for (let i = 0; i < 100; i++) {
-    Ingredients.create({
-        name: i,
-        description: "test desc " + i,
-        threshold: (i % 2 == 0) ? 500 : null,
-        quantity: (i * 2),
-    })
-}
+// for (let i = 0; i < 100; i++) {
+//     Ingredients.create({
+//         name: i,
+//         description: "test desc " + i,
+//         threshold: (i % 2 == 0) ? 500 : 100,
+//         quantity: (i * 2),
+//     })
+// }
 
 export default Ingredients

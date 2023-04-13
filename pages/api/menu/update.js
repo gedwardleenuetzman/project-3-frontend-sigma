@@ -3,7 +3,7 @@ import * as Models from "sql/models"
 export default async function handler(req, res) {
     if (req.method === 'PUT') {
         const { id, name, description, image, threshold, quantity } = req.body;
-        const item = await Models.Ingredients.findByPk(id);
+        const item = await Models.Products.findByPk(id);
 
         if (item) {
             await item.update({ 

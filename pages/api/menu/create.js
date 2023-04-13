@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { name, image, description, threshold, quantity } = req.body;
 
-        await Models.Ingredients.create({ 
+        await Models.Products.create({ 
             name: name,
             image: image,
             description: description,

@@ -10,15 +10,13 @@ function SearchBar({ placeholder, onSearch }) {
     };
 
     const handleSearchClick = () => {
-        if (onSearch) {
-            onSearch(value);
-        }
+        console.log("Searching: ", value)
+        onSearch(value);
     };
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && onSearch) {
-            console.log("Search for: ", value)
-            onSearch(value);
+            handleSearchClick()
         }
     };
 
