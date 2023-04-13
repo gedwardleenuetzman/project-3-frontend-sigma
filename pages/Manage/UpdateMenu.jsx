@@ -7,6 +7,7 @@ import SearchBar from 'src/SearchBar'
 
 import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
+import IngredientTable from 'src/IngredientTable'
 
 export default function UpdateMenu() {
 	const [page, setPage] = React.useState(1)
@@ -83,9 +84,7 @@ export default function UpdateMenu() {
 				title={ mode == "create" ? "Create Ingredient" : "Edit Ingredient" }
 				actions={ mode == "create" ? ["Create", "Cancel"] : ["Save", "Delete", "Cancel"] }
 			>
-
-
-
+				<IngredientTable/>
 			</DialogForm>
 
             <Box sx={{ m: 4, display: 'flex' }}>

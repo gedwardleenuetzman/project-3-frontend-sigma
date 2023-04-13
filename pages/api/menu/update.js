@@ -2,7 +2,7 @@ import * as Models from "sql/models"
 
 export default async function handler(req, res) {
     if (req.method === 'PUT') {
-        const { id, name, description, image, threshold, quantity } = req.body;
+        const { id, name, description, image, price } = req.body;
         const item = await Models.Products.findByPk(id);
 
         if (item) {
@@ -10,13 +10,12 @@ export default async function handler(req, res) {
                 name: name,
                 description: description,
                 image: image,
-                threshold: threshold,
-                quantity: quantity,
+                price: price,
             });
 
-            res.status(200).json({ message: 'Ingredient updated successfully' });
+            res.status(200).json({ message: 'Product updated successfully' });
         } else {
-            res.status(404).json({ message: 'Ingredient not found' });
+            res.status(404).json({ message: 'Product not found' });
         }
     } else {
         res.status(405).json({ message: 'Method not allowed' });

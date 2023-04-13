@@ -31,14 +31,7 @@ export const Products = db.define('v3_products', {
             min: 0
         }
     },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-            min: 0
-        }
-    },
-
+    
     enabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
