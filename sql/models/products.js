@@ -15,9 +15,6 @@ export const Products = db.define('v3_products', {
         type: DataTypes.TEXT,
         allowNull: false,
         defaultValue: "https://d1fd34dzzl09j.cloudfront.net/Images/CFACOM/Home%20Page%20Refresh/Home%20Page%20Refresh%20V2/Waffle_Fry_Lifestyle_317x322.png?h=322&w=317&la=en",
-        validate: {
-          isUrl: true
-        }
     },
     description: {
         type: DataTypes.TEXT,

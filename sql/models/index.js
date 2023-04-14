@@ -15,6 +15,6 @@ export * from "./orderProducts";
 //     })
 //     .catch((err) => {
 //         console.error('Error updating database schema:', err);
-//     });
-
+//     }); 
+ 
 // console.log("sequelize database synced")

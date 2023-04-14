@@ -3,29 +3,30 @@
     "version": "5.0.0",
     "private": true,
     "scripts": {
-      "dev": "next dev",
-      "build": "next build",
-      "start": "next start",
-      "lint": "next lint",
-      "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
     },
     "dependencies": {
-      "@emotion/cache": "latest",
-      "@emotion/react": "latest",
-      "@emotion/server": "latest",
-      "@emotion/styled": "latest",
-      "@mui/icons-material": "latest",
-      "@mui/material": "latest",
-      "next": "latest",
-      "next-auth": "latest",
-      "prop-types": "latest",
-      "react": "latest",
-      "react-dom": "latest",
-      "pg": "latest",
-      "sequelize": "latest"
+        "@emotion/cache": "latest",
+        "@emotion/react": "latest",
+        "@emotion/server": "latest",
+        "@emotion/styled": "latest",
+        "@mui/icons-material": "latest",
+        "@mui/material": "latest",
+        "immutable": "^4.3.0",
+        "next": "latest",
+        "next-auth": "latest",
+        "pg": "latest",
+        "prop-types": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "sequelize": "latest"
     },
     "devDependencies": {
-      "eslint": "latest",
-      "eslint-config-next": "latest"
+        "eslint": "latest",
+        "eslint-config-next": "latest"
     }
-  }
+}

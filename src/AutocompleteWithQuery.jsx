@@ -2,9 +2,19 @@ import React from 'react';
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 
 const AutocompleteWithQuery = ({ query, onChange }) => {
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
+  const [options, setOptions] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
+  const [input, setInput] = React.useState('')
+
+  React.useEffect(() => {
+    setLoading(true);
+
+    query(input).then((result) => {
+      setOptions(result);
+      setLoading(false);
+    });
+  }, [input])
 
   const handleOpen = () => {
     setOpen(true);
@@ -15,16 +25,7 @@ const AutocompleteWithQuery = ({ query, onChange }) => {
   };
 
   const handleInputChange = (event, value) => {
-    if (event && event.type === 'change' && event.target && event.target.value !== '') {
-      setLoading(true);
-
-      query(event.target.value).then((result) => {
-        setOptions(result);
-        setLoading(false);
-      });
-    }
-
-    onChange(event, value)
+    setInput(event.target.value)
   }
 
   return (
@@ -36,6 +37,7 @@ const AutocompleteWithQuery = ({ query, onChange }) => {
       options={options}
       loading={loading}
       getOptionLabel={(option) => option.name}
+      onChange={ onChange }
       renderInput={(params) => (
         <TextField
           {...params}

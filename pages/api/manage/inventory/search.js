@@ -13,7 +13,6 @@ export default async function handler(req, res) {
                 {
                     [Op.or]: [
                         { name: { [Op.iLike]: `%${filter}%` } },
-                        { description: { [Op.iLike]: `%${filter}%` } },
                     ],
                 },
                 { 
@@ -24,7 +23,6 @@ export default async function handler(req, res) {
 
         const orderClause = [
             ['name', 'ASC'],
-            ['description', 'ASC']
         ]
 
         const result = await Models.Ingredients.findAndCountAll({

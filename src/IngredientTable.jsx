@@ -1,57 +1,56 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableRow, TextField, IconButton, Autocomplete } from '@mui/material';
 import { Clear as ClearIcon, Add as AddIcon } from '@mui/icons-material';
 
 import AutocompleteWithQuery from 'src/AutocompleteWithQuery';
 
-const initialRows = [{ id: 1, name: '', quantity: '' }];
+const IngredientTable = ({ initial=[], onChange }) => {
+    const [data, setData] = React.useState(initial)
 
-const IngredientTable = ({ initial }) => {
-    const [data, setData] = React.useState([])
-    const [name, setName] = React.useState("")
+    const [ingredient, setIngredient] = React.useState()
     const [quantity, setQuantity] = React.useState(1)
 
-    const formatData = (info) => {
-        let dict = {}
-
-        info.forEach((row) => {
-            dict[row.id] = (dict[row.id] || 0) + row.quantity
-        })
-
-        return dict
-    }
+    React.useEffect(() => {
+        onChange(data)
+    }, [data])
 
     const handleAddRow = () => {
+        let state = [...data]
+        const row = state.find((row) => row.ingredient.id == ingredient.id)
 
+        if (row) {
+            row.quantity += quantity
+        } else {
+            state.push({ingredient: ingredient, quantity: quantity})
+        }
+
+        setData(state)
     }
 
-    const handleDeleteRow = (id) => {
+    const handleDeleteRow = (index) => {
         return () => {
-            let target = 0
+            let state = [...data]
+            state.splice(index, 1)
 
-            info.forEach((row, index) => {
-                if (row.id == id) {
-                    target = index
-                }
-            }
+            setData(state)
         }
     }
 
-    const handleNameChange = (id, newName) => {
-
+    const handleIngredient = (event, option) => {
+        setIngredient(option)
     }
 
-    const handleQuantityChange = (id, newQuantity) => {
-
+    const handleQuantity = (event) => {
+        setQuantity(parseInt(event.target.value))
     }
 
-    const queryIngredients = async (filter) => {
-        const res = await fetch(`/api/manage/ingredients/search?filter=${ filter }`, { method: "GET" })
+    const queryIngredients = async (filter = '') => {
+        const res = await fetch(`/api/manage/inventory/search?filter=${ filter }`, { method: "GET" })
         const json = await res.json()
 
         return json.rows
-    }
+    }  
 
     return (
         <Table>
@@ -67,7 +66,7 @@ const IngredientTable = ({ initial }) => {
             <TableBody>
                 {data.map((row, index) => (
                     <TableRow key={ index }>
-                        <TableCell>{ row.name }</TableCell>
+                        <TableCell>{ row.ingredient.name }</TableCell>
                         <TableCell>{ row.quantity }</TableCell>
                         <TableCell>
                             <IconButton variant="contained" color="secondary" onClick={() => handleDeleteRow(index)}>
@@ -80,9 +79,7 @@ const IngredientTable = ({ initial }) => {
                 <TableRow>
                     <TableCell>
                         <AutocompleteWithQuery
-                            optionChanged={(event, option) =>
-                                handleIngredientChange(row.id, newValue)
-                            }
+                            onChange={ handleIngredient }
                             renderInput={(params) => (
                                 <TextField {...params} label="Name" variant="outlined" />
                             )}
@@ -94,18 +91,22 @@ const IngredientTable = ({ initial }) => {
                         <TextField
                             sx={{width: 150}}
                             label="Quantity"
+                            defaultValue={1}
+                            inputProps={{
+                                min: 1,
+                            }}
                             type="number"
-                            onChange={(event) =>
-                                handleQuantityChange(row.id, event.target.value)
-                            }
+                            onChange={ handleQuantity }
                             variant="outlined"
                         />
                     </TableCell>
 
                     <TableCell>
-                        <IconButton variant="contained" color="primary" onClick={handleAddRow}>
-                            <AddIcon/>
-                        </IconButton>
+                        {(ingredient && quantity > 0) &&
+                            <IconButton variant="contained" color="primary" onClick={handleAddRow}>
+                                <AddIcon/>
+                            </IconButton>
+                        }
                     </TableCell>
 
                 </TableRow>

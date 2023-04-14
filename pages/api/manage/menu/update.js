@@ -2,7 +2,7 @@ import * as Models from "sql/models"
 
 export default async function handler(req, res) {
     if (req.method === 'PUT') {
-        const { id, name, description, image, price } = req.body;
+        const { id, name, description, image, price, ingredients } = req.body;
         const item = await Models.Products.findByPk(id);
 
         if (item) {
@@ -12,6 +12,20 @@ export default async function handler(req, res) {
                 image: image,
                 price: price,
             });
+
+            await Models.ProductIngredients.destroy({ 
+                where: { 
+                    product_id: id 
+                } 
+            })
+
+            for (const [id, quantity] in ingredients.entries()) {
+                await Models.ProductIngredients.create({
+                    product_id: product,
+                    ingredient_id: id,
+                    ingredient_quantity: quantity,
+                })
+            }
 
             res.status(200).json({ message: 'Product updated successfully' });
         } else {

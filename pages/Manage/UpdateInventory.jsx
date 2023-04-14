@@ -8,43 +8,46 @@ import SearchBar from 'src/SearchBar'
 import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
 
-export default function UpdateInventory() {
+const DIALOG_LAYOUT = [
+	{name: "name", type: "text"},
+	{name: "image", type: "text"},
+	{name: "threshold", type: "number"},
+	{name: "quantity", type: "number"},
+]
+
+const DRAWER_LAYOUT = [
+	[{text: "Home", route: "/Home"}],
+	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
+	[  
+		{text: "Update Inventory", route: "/Manage/UpdateInventory"}, 
+		{text: "Update Menu", route: "/Manage/UpdateMenu"},
+		{text: "Sales Report", route: "/Manage/SalesReport"},
+	]
+]
+
+const CREATE_DIALOG_INITIAL = {
+	name: "Name", 
+	image: "URL", 
+	quantity: 0, 
+	threshold: 0
+}
+
+const fetchContent = async (filter, page) => 
+	await (await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { method: "GET" })).json()
+	
+const UpdateInventory = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
+	const [count, setCount] = React.useState(0)
+
 	const [open, setOpen] = React.useState(false)
 	const [mode, setMode] = React.useState("create")
 	const [editing, setEditing] = React.useState({})
-	const [count, setCount] = React.useState(0)
-
+	
     React.useEffect(() => {
-      	const fetchContent = async () => {
-			const res = await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { method: "GET" })
-        	const json = await res.json()
-
-        	setContent(json);
-      	};
-
-		fetchContent();
+      	fetchContent(filter, page).then(setContent)
     }, [filter, page, count]);
-
-	const dialogLayout = [
-		{name: "name", type: "text"},
-		{name: "description", type: "text"},
-		{name: "image", type: "text"},
-		{name: "threshold", type: "number"},
-		{name: "quantity", type: "number"},
-	]
-
-	const drawerLayout = [
-		[{text: "Home", route: "/Home"}],
-		[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
-		[  
-			{text: "Update Inventory", route: "/Manage/UpdateInventory"}, 
-			{text: "Update Menu", route: "/Manage/UpdateMenu"},
-			{text: "Sales Report", route: "/Manage/SalesReport"},
-		]
-	]
 
 	const onAction = (action, form) => {
 		setOpen(false)
@@ -73,14 +76,14 @@ export default function UpdateInventory() {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Update Inventory" layout={ drawerLayout }/>
+            <StandardAppBar title="Update Inventory" layout={ DRAWER_LAYOUT }/>
 
 			<DialogForm 
 				open={ open } 
-				layout={ dialogLayout }
+				layout={ DIALOG_LAYOUT }
 				onAction={ onAction }
 				onClose={ () => setOpen(false) }
-				initial={ mode == "edit" ? editing : {name: "Name", description: "Description", image: "URL", quantity: 0, threshold: 0} }
+				initial={ mode == "edit" ? editing : CREATE_DIALOG_INITIAL }
 				title={ mode == "create" ? "Create Ingredient" : "Edit Ingredient" }
 				actions={ mode == "create" ? ["Create", "Cancel"] : ["Save", "Delete", "Cancel"] }
 			/>
@@ -118,3 +121,5 @@ export default function UpdateInventory() {
         </React.Fragment>
     )
 }
+
+export default UpdateInventory
