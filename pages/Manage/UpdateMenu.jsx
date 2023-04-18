@@ -130,7 +130,7 @@ const UpdateMenu = () => {
                         	<SearchCard 
 								name={ row.name } 
 								image={ row.image } 
-								description={ row.description } 
+								description={ "$" + row.price + " - " + row.description } 
 								actions={ ["Edit"] } 
 								onAction={ () => { setMode("edit"); setOpen(true); setEditing({...row})  } }
 							/>

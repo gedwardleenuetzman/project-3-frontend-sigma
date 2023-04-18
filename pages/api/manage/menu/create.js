@@ -4,7 +4,6 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { name, image, description, price, ingredients } = req.body;
 
-        console.log("create", ingredients)
         const product = await Models.Products.create({ 
             name: name,
             image: image,
@@ -13,7 +12,6 @@ export default async function handler(req, res) {
         });
 
         for (const item of ingredients) {
-            console.log(product.id, item)
             await Models.ProductIngredients.create({
                 product_id: product.id,
                 ingredient_id: item.id,
