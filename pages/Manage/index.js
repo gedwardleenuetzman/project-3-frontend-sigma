@@ -5,7 +5,7 @@ export default function index() {
 export async function getServerSideProps() {
     return {
       redirect: {
-        destination: '/Manage/UpdateInventory',
+        destination: '/Manage/Manage',
         permanent: true,
       },
     };
