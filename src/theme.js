@@ -14,10 +14,10 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: '#556cd6',
+      main: '#C41E3A', // Chick-fil-A red
     },
     secondary: {
-      main: '#19857b',
+      main: "#FFC107", // Chick-fil-A yellow
     },
     error: {
       main: red.A400,
