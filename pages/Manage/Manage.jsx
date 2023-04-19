@@ -9,6 +9,11 @@ import SearchBar from 'src/SearchBar'
 
 import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 const DIALOG_LAYOUT = [
 	{name: "name", type: "text"},
@@ -56,27 +61,139 @@ const Manage = () => {
             <StandardAppBar title="Manager" layout={ DRAWER_LAYOUT }/>
 
             <Box sx={{m: 4}}>
-                <Grid container spacing={2}>
-					{0 && 0((row, index) => (
-                    	<Grid key={index} item xs="auto">
-                        	<SearchCard 
-								name={"Update Inventory"} 
-								image={ row.image } 
-								description={ row.description } 
-								actions={ ["Edit"] } 
-								onAction={ () => { setMode("edit"); setOpen(true); setEditing({...row})  } }
-							/>
-                    	</Grid>
-					))}
+                <Grid 
+                container
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center"
+                rowSpacing={1} 
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                >
+                    <Grid item xs="auto">
+
+                        // Update Inventory Card
+
+                        <Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Update Inventory
+                                </Typography>
+                                <CardMedia
+                                    component="img"
+                                    image="/pages/Manage/box.png"
+                                    alt="Update Inventory Box image"
+                                />
+                                <Typography variant="body2">
+                                Menu to update inventory manually
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Enter</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs="auto">
+                    <   Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Update Menu
+                                </Typography>
+                                <CardMedia
+                                    component="img"
+                                    image="/pages/Manage/box.png"
+                                    alt="Update Menu image"
+                                />
+                                <Typography variant="body2">
+                                Menu to update the menu manually
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Enter</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs="auto">
+                        <Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Generate Z Report
+                                </Typography>
+                                <CardMedia
+                                    component="img"
+                                    image="/pages/Manage/box.png"
+                                    alt="Z Report Image"
+                                />
+                                <Typography variant="body2">
+                                Creates Z report and makes it available for download
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Enter</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs="auto" >
+                        <Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Generate X Report
+                                </Typography>
+                                <CardMedia
+                                    component="img"
+                                    image="/pages/Manage/box.png"
+                                    alt="X Report Image"
+                                />
+                                <Typography variant="body2">
+                                Create X report and makes it available for download
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Enter</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs="auto" >
+                        <Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Generate Excess Report
+                                </Typography>
+                                <CardMedia
+                                    component="img"
+                                    image="/pages/Manage/box.png"
+                                    alt="Excess Report Image"
+                                />
+                                <Typography variant="body2">
+                                Create excess report and makes it available for download
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Enter</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs="auto" >
+                        <Card sx={{ minWidth: 275 }}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Generate Sales Report
+                                </Typography>
+                                <CardMedia
+                                    component="img"
+                                    image="/pages/Manage/box.png"
+                                    alt="Sales Report Image"
+                                />
+                                <Typography variant="body2">
+                                Create sales report for specific items between dates
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Enter</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
                 </Grid>
             </Box>
-
-            <Box sx={{m: 4}}>
-                <h1>Hello World!</h1>
-                <h1>Hello World!</h1>
-                <h1>Hello World!</h1>
-            </Box>
-
         </React.Fragment>
     )
 }
