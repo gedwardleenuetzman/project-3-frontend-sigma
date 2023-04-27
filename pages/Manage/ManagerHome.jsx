@@ -61,7 +61,7 @@ const Manage = () => {
             <StandardAppBar title="Manager" layout={ DRAWER_LAYOUT }/>
 
             <Box sx={{m: 4}}>
-                <Grid 
+                <Grid
                 container
                 direction="row"
                 justifyContent="space-evenly"
@@ -165,7 +165,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Enter</Button>
+                                <Button size="small" href="/Manage/ExcessReport">Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
