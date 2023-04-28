@@ -9,15 +9,16 @@ import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
 
 const DIALOG_LAYOUT = [
-	{name: "Product ID", type: "number"},
-	{name: "Product Quantity", type: "number"},
-	{name: "Product Price", type: "number"},
-    {name: "Product Total", type: "number"},
+	{name: "order_id", type: "number"},
+	{name: "product_id", type: "text"},
+	{name: "product_quantity", type: "number"},
+	{name: "product_price", type: "number"},
+	{name: "product_total_price", type: "number"},
 ]
 
 const DRAWER_LAYOUT = [
 	[{text: "Home", route: "/Home"}],
-	[{text: "Manage", route: "/Manage"}],
+	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
 	[  
 		{text: "Update Inventory", route: "/Manage/UpdateInventory"}, 
 		{text: "Update Menu", route: "/Manage/UpdateMenu"},
@@ -32,8 +33,11 @@ const CREATE_DIALOG_INITIAL = {
 	threshold: 0
 }
 
+// const productInfo = async (filter, page) =>
+// 	await (await fetch('/api/'))
+
 const fetchContent = async (filter, page) => 
-	await (await fetch(`/api/order/placeorder/search?filter=${ filter }&page=${ page }`, { method: "GET" })).json()
+	await (await fetch(`/api/manage/menu/search?filter=${ filter }&page=${ page }`, { method: "GET" })).json()
 	
 const PlaceOrder = () => {
 	const [page, setPage] = React.useState(1)
@@ -59,7 +63,15 @@ const PlaceOrder = () => {
 			url = '/api/order/placeorder'
 			content.method = 'POST'
 			content.body = JSON.stringify({...form})
-		}
+		} // } else if (mode == "edit" && action == "Save") {  
+		// 	url = '/api/manage/inventory/update'
+		// 	content.method = 'PUT'
+		// 	content.body = JSON.stringify({...editing, ...form})
+		// } else if (mode == "edit" && action == "Delete") {
+		// 	url = '/api/manage/inventory/remove'
+		// 	content.method = 'PUT'
+		// 	content.body = JSON.stringify({id: editing.id})
+		// }
 
 		fetch(url, content).finally(() => {
 			setCount(count + 1)
@@ -75,7 +87,7 @@ const PlaceOrder = () => {
 				layout={ DIALOG_LAYOUT }
 				onAction={ onAction }
 				onClose={ () => setOpen(false) }
-				initial={ mode == "create" ? editing : CREATE_DIALOG_INITIAL }
+				initial={ mode == "edit" ? editing : CREATE_DIALOG_INITIAL }
 				title={ mode == "create" ? "Create Ingredient" : "Edit Ingredient" }
 				actions={ mode == "create" ? ["Create", "Cancel"] : ["Save", "Delete", "Cancel"] }
 			/>
@@ -102,8 +114,8 @@ const PlaceOrder = () => {
 								name={ row.name } 
 								image={ row.image } 
 								description={ row.quantity } 
-								actions={ ["Edit"] } 
-								onAction={ () => { setMode("edit"); setOpen(true); setEditing({...row})  } }
+								actions={ ["Add"] } 
+								onAction={ () => { setMode("edit"); setOpen(true); setEditing({...row})  } } // does the thing when you press add
 							/>
                     	</Grid>
 					))}

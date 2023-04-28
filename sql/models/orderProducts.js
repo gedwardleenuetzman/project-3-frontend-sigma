@@ -6,7 +6,6 @@ export const orderProducts = db.define('v3_order_products', {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
     },
 
     product_id: {
