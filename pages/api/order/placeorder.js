@@ -1,13 +1,14 @@
 import db from "/sql/db"
 import Orders from "/sql/models/orders"
 import orderProducts from "/sql/models/orderProducts"
-import Ingredients from "/sql/models/Ingredients"
+import Ingredients from "/sql/models/ingredients"
 import ProductIngredients from "/sql/models/productIngredients"
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { server_id, product_details } = req.body;
 
+    console.log("Body:")
     console.log(req.body);
 
     // Create a transaction to ensure atomicity of the updates

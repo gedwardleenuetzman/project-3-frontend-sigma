@@ -9,11 +9,11 @@ import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
 
 const DIALOG_LAYOUT = [
-	{name: "order_id", type: "number"},
-	{name: "product_id", type: "text"},
+	{name: "server_id", type: "number"},
+	// {name: "product_details", type: "text"},
+	{name: "product_id", type: "number"},
 	{name: "product_quantity", type: "number"},
 	{name: "product_price", type: "number"},
-	{name: "product_total_price", type: "number"},
 ]
 
 const DRAWER_LAYOUT = [
@@ -82,7 +82,7 @@ const PlaceOrder = () => {
         <React.Fragment>
             <StandardAppBar title="Place Order" layout={ DRAWER_LAYOUT }/>
 
-			<DialogForm 
+			<DialogForm
 				open={ open } 
 				layout={ DIALOG_LAYOUT }
 				onAction={ onAction }
@@ -94,7 +94,7 @@ const PlaceOrder = () => {
 
             <Box sx={{ m: 4, display: 'flex' }}>
             	<SearchBar onSearch={ (val) => setFilter(val) }/>
-                <Button sx={{ ml: 2 }} variant="outlined" onClick={ () => { setMode("create"); setOpen(true) } }>Create</Button>
+                <Button sx={{ ml: 2 }} variant="outlined" onClick={ () => { setMode("create"); setOpen(true) } }>Place</Button>
             </Box>
         
             <Pagination 
