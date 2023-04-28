@@ -15,6 +15,10 @@ const IngredientTable = ({ initial=[], onChange }) => {
         onChange(data)
     }, [data])
 
+    // React.useEffect(() => {
+    //     setData([ ...initial ])
+    // }, [initial])
+
     const handleAddRow = () => {
         let state = [...data]
         const row = state.find((row) => row.ingredient.id == ingredient.id)
@@ -64,12 +68,12 @@ const IngredientTable = ({ initial=[], onChange }) => {
             </TableHead>
 
             <TableBody>
-                {data.map((row, index) => (
+                {data && data.map((row, index) => (
                     <TableRow key={ index }>
                         <TableCell>{ row.ingredient.name }</TableCell>
                         <TableCell>{ row.quantity }</TableCell>
                         <TableCell>
-                            <IconButton variant="contained" color="secondary" onClick={() => handleDeleteRow(index)}>
+                            <IconButton variant="contained" color="secondary" onClick={handleDeleteRow(index)}>
                                 <ClearIcon/>
                             </IconButton>
                         </TableCell>
