@@ -1,13 +1,15 @@
 import db from "/sql/db"
 import Orders from "/sql/models/orders"
 import orderProducts from "/sql/models/orderProducts"
+import Ingredients from "/sql/models/Ingredients"
+import ProductIngredients from "/sql/models/productIngredients"
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { server_id, product_details } = req.body;
 
     console.log(req.body);
-    
+
     // Create a transaction to ensure atomicity of the updates
     const t = await db.transaction();
 
@@ -21,6 +23,36 @@ export default async function handler(req, res) {
         const { product_id, product_quantity, product_price } = product;
         const product_total_price = product_quantity * product_price;
         total_price += product_total_price;
+
+        const productIngredients = await ProductIngredients.findAll({
+          where: { product_id: product_id },
+          attributes: ['ingredient_id', 'ingredient_quantity'],
+          transaction: t
+        });
+
+        for (const ingredient of productIngredients) {
+          const { ingredient_id, ingredient_quantity } = ingredient;
+
+          const existingIngredient = await Ingredients.findOne({
+            where: { id: ingredient_id },
+            transaction: t
+          });
+
+          if (!existingIngredient) {
+            throw new Error('Ingredient not found');
+          }
+
+          const newQuantity = existingIngredient.quantity - (ingredient_quantity * product_quantity);
+
+          if (newQuantity < 0) {
+            throw new Error('Insufficient ingredients');
+          }
+
+          await existingIngredient.update({
+            quantity: newQuantity
+          }, { transaction: t });
+        }
+
         await orderProducts.create({
           product_id: product_id,
           product_quantity: product_quantity,
