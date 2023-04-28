@@ -7,7 +7,7 @@ export default function TemporaryDrawer(props) {
     const anchor = 'left'
     const router = useRouter()
     const [open, setOpen] = React.useState(false)
-    
+
     const toggleDrawer = (b) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return
@@ -28,11 +28,11 @@ export default function TemporaryDrawer(props) {
                         {items.map((item, itemIndex) => (
                             <ListItem key={itemIndex} disablePadding>
                                 <ListItemButton onClick={clicked(item.route)} selected={router.pathname.startsWith(item.route)}>
-                                    <ListItemText primary={item.text}/>
+                                    <ListItemText primary={item.text} />
                                 </ListItemButton>
                             </ListItem>
                         ))}
-                        <Divider/>
+                        <Divider />
                     </React.Fragment>
                 ))}
             </List>
@@ -42,7 +42,7 @@ export default function TemporaryDrawer(props) {
     return (
         <React.Fragment>
             <IconButton onClick={toggleDrawer(true)}>
-                <MenuIcon/>
+                <MenuIcon />
             </IconButton>
             <Drawer anchor={anchor} open={open} onClose={toggleDrawer(false)}>
                 {list()}

@@ -8,6 +8,7 @@ import SearchBar from 'src/SearchBar'
 import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
 import IngredientTable from 'src/IngredientTable'
+import ShoppingCart from 'src/ShoppingCart'
 
 // const DIALOG_LAYOUT = [
 //   { name: "name", type: "text" },

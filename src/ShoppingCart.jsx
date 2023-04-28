@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 
-function FoodItem({ name, price }) {
+function ShoppingCart({ name, price }) {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(price);
 
