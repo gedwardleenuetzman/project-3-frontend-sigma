@@ -19,11 +19,11 @@ export default async function handler(req, res) {
                 } 
             })
 
-            for (const [id, quantity] in ingredients.entries()) {
+            for (const item of ingredients) {
                 await Models.ProductIngredients.create({
-                    product_id: product,
-                    ingredient_id: id,
-                    ingredient_quantity: quantity,
+                    product_id: id,
+                    ingredient_id: item.id,
+                    ingredient_quantity: item.quantity,
                 })
             }
 
