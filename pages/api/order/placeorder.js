@@ -6,10 +6,11 @@ import ProductIngredients from "/sql/models/productIngredients"
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { server_id, product_details } = req.body;
-
+    // const { server_id, product_details } = req.body;
+    const { server_id, product_details } = {server_id: 0, product_details: [{product_id: 1, product_quantity: 1, product_price: 5.00}, {product_id: 1, product_quantity: 1, product_price: 5.00},]}
+    // above are hardcoded values to illustrate data structure that this file needs.
     console.log("Body:")
-    console.log(req.body);
+    console.log(server_id, product_details);
 
     // Create a transaction to ensure atomicity of the updates
     const t = await db.transaction();
