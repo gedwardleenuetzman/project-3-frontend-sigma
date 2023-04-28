@@ -19,8 +19,13 @@ export default function SearchCard({ name, description, image, actions, onAction
       <Box sx={{ width: 300, height: 150 }}>
 
         <CardContent sx={{ height: 95 }}>
+<<<<<<< HEAD
           <Typography variant="h6" component="div"> {name} </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary"> {description} </Typography>
+=======
+          <Typography variant="h6" component="div"> { name } </Typography>
+          <Typography sx={{ overflow: "hidden", height: 50 }} color="text.secondary"> { description } </Typography>
+>>>>>>> main
         </CardContent>
 
         <CardActions sx={{ ml: 1 }}>
