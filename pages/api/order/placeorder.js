@@ -62,6 +62,14 @@ export default async function handler(req, res) {
           product_total_price: product_total_price,
           order_id: order.id,
         }, { transaction: t });
+
+        // await dailyorderProducts.create({
+        //     product_id: product_id,
+        //     product_quantity: product_quantity,
+        //     product_price: product_price,
+        //     product_total_price: product_total_price,
+        //     order_id: order.id,
+        //   }, { transaction: t });
       }
 
       // Update the total price of the order in the orders table
