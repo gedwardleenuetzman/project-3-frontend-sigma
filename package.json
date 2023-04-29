@@ -16,6 +16,7 @@
         "@emotion/styled": "latest",
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
+        "@react-google-maps/api": "^2.18.1",
         "immutable": "^4.3.0",
         "next": "latest",
         "next-auth": "latest",
