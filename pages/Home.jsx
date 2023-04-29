@@ -4,9 +4,13 @@ import { useSession, signIn, signOut, getSession } from "next-auth/react"
 import AccountMenu from '../src/AccountMenu';
 import RouteDrawer from '../src/RouteDrawer';
 import styles from '../src/styles/home.module.css'
-import Carousel from '../src/Carousel';
 import '../src/styles/home.module.css';
 
+
+
+const bodyStyle = {
+    padding: 10,
+}
 
 
 
@@ -23,10 +27,10 @@ export default function Home() {
             <AccountMenu></AccountMenu>
             <RouteDrawer layout={[
                 [{ text: "Home", route: "/Home" }],
-                [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+
+                [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }, { text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
             ]}>
             </RouteDrawer>
-
 
             <div className="home-page">
                 <div className="logo">
@@ -36,8 +40,7 @@ export default function Home() {
 
                 </div>
 
-                <Carousel />
-                <div className="block-of-text">
+                <div style={bodyStyle}>
                     <h1 align="center">Welcome to Chick-Fil-A!</h1>
                     <p align="center">Atlanta-based Chick-fil-A, Inc. is a family owned and privately held restaurant company founded in 1964 by S. Truett Cathy. Devoted to serving the local communities in which its franchised restaurants operate, and known for its original chicken sandwich, Chick-fil-A serves freshly prepared food.</p>
                     <p align="center">Visit us today at one of our many locations, and enjoy a tasty meal that will leave you satisfied and wanting more!</p>
@@ -47,8 +50,7 @@ export default function Home() {
                         <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d54925.97740322061!2d-96.38542732064194!3d30.63752001205226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1schick%20fil%20a!5e0!3m2!1sen!2sus!4v1682797802748!5m2!1sen!2sus"
                             width="600"
                             height="450"
-
-                            style={{ border: "0" }}
+                            style={{ border: "0", borderRadius: "1%" }}
                             allowfullscreen=""
                             loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade">

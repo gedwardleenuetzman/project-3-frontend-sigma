@@ -105,6 +105,7 @@ const PlaceOrder = () => {
 								description={row.quantity}
 								actions={["Add"]}
 								onAction={() => { setId(row.id); setOpen(true) }} // does the thing when you press add
+
 							/>
 						</Grid>
 					))}

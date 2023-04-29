@@ -25,7 +25,8 @@
         "react": "latest",
         "react-dom": "latest",
         "react-router-dom": "^6.10.0",
-        "sequelize": "latest"
+        "sequelize": "latest",
+        "webfontloader": "^1.6.28"
     },
     "devDependencies": {
         "eslint": "latest",

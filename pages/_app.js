@@ -8,7 +8,6 @@ import { SessionProvider } from "next-auth/react"
 import theme from '../src/theme';
 import styles from './Order';
 import image from './cfaLogo.png';
-import { Carousel } from '../src/Carousel';
 import '../src/styles/home.module.css'
 
 
