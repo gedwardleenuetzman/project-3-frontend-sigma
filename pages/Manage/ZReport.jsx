@@ -34,12 +34,18 @@ const CREATE_DIALOG_INITIAL = {
 }
 	
 const ZReport = () => {
+	const [content, setContent] = React.useState({});
 
-	const Zfetch = () => {
-		fetch('/api/manage/reports/zreport/zreport', {method: 'GET'})
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
+	React.useEffect(() =>{
+		Zfetch();
+	}, []);
+
+	async function Zfetch() {
+		const response = await fetch('/api/manage/reports/zreport/totalprice', {method: 'GET'})
+
+		const totalprice = await response.json();
+
+		setData(totalprice);
 	}
 
     return (
@@ -48,6 +54,9 @@ const ZReport = () => {
 
             <Box sx={{ m: 4, display: 'flex' }}>
                 <Button sx={{ ml: 2 }} variant="outlined" onClick={ () => { Zfetch() } }>Generate</Button>
+				{response.map((item) => (
+					<p>{item}</p>
+				))}
             </Box>
 
         </React.Fragment>
