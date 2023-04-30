@@ -73,6 +73,7 @@ const Manage = () => {
         <React.Fragment>
             <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
 
+<<<<<<< HEAD
             <Box sx={{m: 4}}>
                 <Grid
                 container
@@ -81,6 +82,16 @@ const Manage = () => {
                 alignItems="center"
                 rowSpacing={1} 
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+=======
+            <Box sx={{ m: 4 }}>
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    rowSpacing={1}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+>>>>>>> 54be58f (orders show up in both tables now)
                 >
                     <Grid item xs="auto">
                         <Card sx={{ minWidth: 275 }}>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 
 import { Pagination, Grid, Box, Button } from '@mui/material'
@@ -127,3 +128,17 @@ const Order = () => {
 }
 
 export default Order
+=======
+export default function index() {
+  return <></>
+}
+
+export async function getServerSideProps() {
+  return {
+    redirect: {
+      destination: '/Order/PlaceOrder',
+      permanent: true,
+    },
+  };
+}
+>>>>>>> 54be58f (orders show up in both tables now)
