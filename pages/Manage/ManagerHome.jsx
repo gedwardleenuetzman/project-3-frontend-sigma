@@ -16,50 +16,61 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 const DIALOG_LAYOUT = [
-	{name: "name", type: "text"},
-	{name: "image", type: "text"},
-	{name: "threshold", type: "number"},
-	{name: "quantity", type: "number"},
+    { name: "name", type: "text" },
+    { name: "image", type: "text" },
+    { name: "threshold", type: "number" },
+    { name: "quantity", type: "number" },
 ]
 
 const DRAWER_LAYOUT = [
-	[{text: "Home", route: "/Home"}],
-	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
-	[  
-		{text: "Update Inventory", route: "/Manage/UpdateInventory"}, 
-		{text: "Update Menu", route: "/Manage/UpdateMenu"},
-		{text: "Sales Report", route: "/Manage/SalesReport"},
-	]
+    [{ text: "Home", route: "/Home" }],
+    [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
+    [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+    [
+        { text: "Update Inventory", route: "/Manage/UpdateInventory" },
+        { text: "Update Menu", route: "/Manage/UpdateMenu" },
+        { text: "Sales Report", route: "/Manage/SalesReport" },
+    ]
 ]
 
 const CREATE_DIALOG_INITIAL = {
-	name: "Name", 
-	image: "URL", 
-	quantity: 0, 
-	threshold: 0
+    name: "Name",
+    image: "URL",
+    quantity: 0,
+    threshold: 0
 }
 
-const fetchContent = async (filter, page) => 
-	await (await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { method: "GET" })).json()
-	
-const Manage = () => {
-	const [page, setPage] = React.useState(1)
-	const [filter, setFilter] = React.useState("")
-	const [content, setContent] = React.useState({})
-	const [count, setCount] = React.useState(0)
+const fetchContent = async (filter, page) =>
+    await (await fetch(`/api/manage/inventory/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
 
-	const [open, setOpen] = React.useState(false)
-	const [mode, setMode] = React.useState("create")
-	const [editing, setEditing] = React.useState({})
-	
+const Manage = () => {
+    const [page, setPage] = React.useState(1)
+    const [filter, setFilter] = React.useState("")
+    const [content, setContent] = React.useState({})
+    const [count, setCount] = React.useState(0)
+
+    const [open, setOpen] = React.useState(false)
+    const [mode, setMode] = React.useState("create")
+    const [editing, setEditing] = React.useState({})
+
     React.useEffect(() => {
-      	fetchContent(filter, page).then(setContent)
+        fetchContent(filter, page).then(setContent)
     }, [filter, page, count]);
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Manager" layout={ DRAWER_LAYOUT }/>
+            <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
 
+<<<<<<< HEAD:pages/Manage/Manage.jsx
+            <Box sx={{ m: 4 }}>
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    rowSpacing={1}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+=======
             <Box sx={{m: 4}}>
                 <Grid
                 container
@@ -68,12 +79,13 @@ const Manage = () => {
                 alignItems="center"
                 rowSpacing={1} 
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+>>>>>>> ralph:pages/Manage/ManagerHome.jsx
                 >
                     <Grid item xs="auto">
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Update Inventory
+                                    Update Inventory
                                 </Typography>
                                 <CardMedia
                                     component="img"
@@ -81,7 +93,7 @@ const Manage = () => {
                                     alt="Update Inventory Box image"
                                 />
                                 <Typography variant="body2">
-                                Menu to update inventory manually
+                                    Menu to update inventory manually
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -90,10 +102,10 @@ const Manage = () => {
                         </Card>
                     </Grid>
                     <Grid item xs="auto">
-                    <   Card sx={{ minWidth: 275 }}>
+                        <   Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Update Menu
+                                    Update Menu
                                 </Typography>
                                 <CardMedia
                                     component="img"
@@ -101,7 +113,7 @@ const Manage = () => {
                                     alt="Update Menu image"
                                 />
                                 <Typography variant="body2">
-                                Menu to update the menu manually
+                                    Menu to update the menu manually
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -113,7 +125,7 @@ const Manage = () => {
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Generate Z Report
+                                    Generate Z Report
                                 </Typography>
                                 <CardMedia
                                     component="img"
@@ -121,7 +133,7 @@ const Manage = () => {
                                     alt="Z Report Image"
                                 />
                                 <Typography variant="body2">
-                                Creates Z report and makes it available for download
+                                    Creates Z report and makes it available for download
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -133,7 +145,7 @@ const Manage = () => {
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Generate X Report
+                                    Generate X Report
                                 </Typography>
                                 <CardMedia
                                     component="img"
@@ -141,7 +153,7 @@ const Manage = () => {
                                     alt="X Report Image"
                                 />
                                 <Typography variant="body2">
-                                Create X report and makes it available for download
+                                    Create X report and makes it available for download
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -153,7 +165,7 @@ const Manage = () => {
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Generate Excess Report
+                                    Generate Excess Report
                                 </Typography>
                                 <CardMedia
                                     component="img"
@@ -161,7 +173,7 @@ const Manage = () => {
                                     alt="Excess Report Image"
                                 />
                                 <Typography variant="body2">
-                                Create excess report and makes it available for download
+                                    Create excess report and makes it available for download
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -173,7 +185,7 @@ const Manage = () => {
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                Generate Sales Report
+                                    Generate Sales Report
                                 </Typography>
                                 <CardMedia
                                     component="img"
@@ -181,7 +193,7 @@ const Manage = () => {
                                     alt="Sales Report Image"
                                 />
                                 <Typography variant="body2">
-                                Create sales report for specific items between dates
+                                    Create sales report for specific items between dates
                                 </Typography>
                             </CardContent>
                             <CardActions>
