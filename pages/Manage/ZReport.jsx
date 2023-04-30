@@ -8,20 +8,20 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const DIALOG_LAYOUT = [
-	{name: "name", type: "text"},
-	{name: "image", type: "text"},
-	{name: "threshold", type: "number"},
-	{name: "quantity", type: "number"},
+	{ name: "name", type: "text" },
+	{ name: "image", type: "text" },
+	{ name: "threshold", type: "number" },
+	{ name: "quantity", type: "number" },
 ]
 
 const DRAWER_LAYOUT = [
-	[{text: "Home", route: "/Home"}],
-	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
-	[  
-		{text: "Update Inventory", route: "/Manage/UpdateInventory"}, 
-		{text: "Update Menu", route: "/Manage/UpdateMenu"},
-		{text: "Sales Report", route: "/Manage/SalesReport"},
-        {text: "Z Report", route: "/Manage/ZReport"},
+	[{ text: "Home", route: "/Home" }],
+	[{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+	[
+		{ text: "Update Inventory", route: "/Manage/UpdateInventory" },
+		{ text: "Update Menu", route: "/Manage/UpdateMenu" },
+		{ text: "Sales Report", route: "/Manage/SalesReport" },
+		{ text: "Z Report", route: "/Manage/ZReport" },
 	]
 ]
 
@@ -56,9 +56,9 @@ const ZReport = () => {
 		}
 	}
 
-    return (
-        <React.Fragment>
-            <StandardAppBar title="Z Report" layout={ DRAWER_LAYOUT }/>
+	return (
+		<React.Fragment>
+			<StandardAppBar title="Z Report" layout={DRAWER_LAYOUT} />
 
             <Box sx={{ m: 4, display: 'flex' }}>
                 <Button sx={{ ml: 2 }} variant="outlined" onClick={ () => { Zfetch() } }>Generate</Button>
