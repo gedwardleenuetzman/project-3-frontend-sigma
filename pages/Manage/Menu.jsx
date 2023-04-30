@@ -9,21 +9,13 @@ import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
 import IngredientTable from 'src/IngredientTable'
 
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
+
 const DIALOG_LAYOUT = [
 	{name: "name", type: "text"},
 	{name: "description", type: "text"},
 	{name: "image", type: "text"},
 	{name: "price", type: "number"},
-]
-
-const DRAWER_LAYOUT = [
-	[{text: "Home", route: "/Home"}],
-	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
-	[  
-		{text: "Update Inventory", route: "/Manage/UpdateInventory"}, 
-		{text: "Update Menu", route: "/Manage/UpdateMenu"},
-		{text: "Sales Report", route: "/Manage/SalesReport"},
-	]
 ]
 
 const CREATE_DIALOG_INITIAL = {
@@ -92,7 +84,7 @@ const UpdateMenu = () => {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Update Menu" layout={ DRAWER_LAYOUT }/>
+            <StandardAppBar title="Update Menu" layout={ MANAGE_ROUTE_DRAWER_LAYOUT }/>
 
 			<DialogForm 
 				open={ open } 

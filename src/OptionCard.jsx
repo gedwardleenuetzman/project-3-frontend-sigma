@@ -1,14 +1,12 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
-export default function OptionCard({desc, buttons, onClick}) {
+import { Card, CardActions, CardContent, Button, Typography, CardMedia } from '@mui/material'
+
+export default function OptionCard({desc, title, image, children, onClick}) {
 	const handleClick = (action) => {
-		onClick(action)
+		if (onClick) {
+			onClick(action)
+		}
 	}
 
 	return (
@@ -23,9 +21,7 @@ export default function OptionCard({desc, buttons, onClick}) {
 			</CardContent>
 
 			<CardActions>
-				{buttons.map((action) => (
-					<Button onClick={handleClick(action)} size="small">{ action }</Button>
-				))}
+				{ children }
 			</CardActions>
 		</Card>
 	);
