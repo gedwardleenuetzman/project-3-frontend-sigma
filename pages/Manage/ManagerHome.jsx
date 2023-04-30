@@ -14,6 +14,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { auto } from '@popperjs/core';
 
 const DIALOG_LAYOUT = [
     { name: "name", type: "text" },
@@ -57,20 +58,21 @@ const Manage = () => {
         fetchContent(filter, page).then(setContent)
     }, [filter, page, count]);
 
+    const styles = {
+        media: {
+            height: '100px',
+            width: '100px',
+            margin: auto,
+        },
+        button: {
+            margin:auto
+        }
+    };
+
     return (
         <React.Fragment>
             <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
 
-<<<<<<< HEAD:pages/Manage/Manage.jsx
-            <Box sx={{ m: 4 }}>
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="center"
-                    rowSpacing={1}
-                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-=======
             <Box sx={{m: 4}}>
                 <Grid
                 container
@@ -79,45 +81,46 @@ const Manage = () => {
                 alignItems="center"
                 rowSpacing={1} 
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
->>>>>>> ralph:pages/Manage/ManagerHome.jsx
                 >
                     <Grid item xs="auto">
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
+                                <CardMedia
+                                    component="img"
+                                    image="https://www.pngall.com/wp-content/uploads/5/Box.png"
+                                    alt="Update Inventory Box image"
+                                    style={styles.media}
+                                />
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Update Inventory
                                 </Typography>
-                                <CardMedia
-                                    component="img"
-                                    image="/pages/Manage/box.png"
-                                    alt="Update Inventory Box image"
-                                />
                                 <Typography variant="body2">
                                     Menu to update inventory manually
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" href="/Manage/UpdateInventory">Enter</Button>
+                                <Button size="medium" href="/Manage/UpdateInventory" style={styles.button}>Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
                     <Grid item xs="auto">
                         <   Card sx={{ minWidth: 275 }}>
                             <CardContent>
+                                <CardMedia
+                                    component="img"
+                                    image="https://cdn-icons-png.flaticon.com/512/151/151409.png"
+                                    alt="Update Menu image"
+                                    style={styles.media}
+                                />
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Update Menu
                                 </Typography>
-                                <CardMedia
-                                    component="img"
-                                    image="/pages/Manage/box.png"
-                                    alt="Update Menu image"
-                                />
                                 <Typography variant="body2">
                                     Menu to update the menu manually
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" href="/Manage/UpdateMenu">Enter</Button>
+                                <Button size="medium" href="/Manage/UpdateInventory" style={styles.button}>Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
