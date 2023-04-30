@@ -5,7 +5,7 @@ export default function index() {
 export async function getServerSideProps() {
     return {
       redirect: {
-        destination: '/Manage/Manage',
+        destination: '/Manage/ManagerHome',
         permanent: true,
       },
     };
