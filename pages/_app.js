@@ -7,6 +7,10 @@ import { CacheProvider } from '@emotion/react';
 import { SessionProvider } from "next-auth/react"
 import theme from '../src/theme';
 import styles from './Order';
+import image from './cfaLogo.png';
+import '../src/styles/home.module.css'
+
+
 
 
 
