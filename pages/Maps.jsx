@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+// This is EXAMPLE CODE FOR THE MAPS IMPLEMENTATION THAT DOES NOT WORK. OZZIE'S WORKS. IGNORE THIS.
+
 function MyComponent() {
   useEffect(() => {
     // Load the Google Maps API script
