@@ -61,6 +61,7 @@ const Manage = () => {
         <React.Fragment>
             <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
 
+<<<<<<< HEAD:pages/Manage/Manage.jsx
             <Box sx={{ m: 4 }}>
                 <Grid
                     container
@@ -69,11 +70,18 @@ const Manage = () => {
                     alignItems="center"
                     rowSpacing={1}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+=======
+            <Box sx={{m: 4}}>
+                <Grid
+                container
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center"
+                rowSpacing={1} 
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+>>>>>>> ralph:pages/Manage/ManagerHome.jsx
                 >
                     <Grid item xs="auto">
-
-                        // Update Inventory Card
-
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -89,7 +97,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Enter</Button>
+                                <Button size="small" href="/Manage/UpdateInventory">Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -109,7 +117,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Enter</Button>
+                                <Button size="small" href="/Manage/UpdateMenu">Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -129,7 +137,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Enter</Button>
+                                <Button size="small" href="/Manage/ZReport">Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -169,7 +177,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Enter</Button>
+                                <Button size="small" href="/Manage/ExcessReport">Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
