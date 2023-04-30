@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Pagination, Grid, Box, Button } from '@mui/material'
+import { Button } from '@mui/material'
 
 import StandardAppBar from 'src/StandardAppBar'
-import SearchBar from 'src/SearchBar'
-
-import SearchCard from 'src/SearchCard'
-import DialogForm from 'src/DialogForm'
+import { Box, Typography } from '@mui/material';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 
 const DIALOG_LAYOUT = [
 	{name: "name", type: "text"},
@@ -26,26 +25,35 @@ const DRAWER_LAYOUT = [
 	]
 ]
 
-const CREATE_DIALOG_INITIAL = {
-	name: "Name", 
-	image: "URL", 
-	quantity: 0, 
-	threshold: 0
-}
+// Define the fade-in animation
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+// Define a styled component for the box that uses the fade-in animation
+const FadeInBox = styled(Box)`
+  animation: ${fadeIn} 1s ease-in-out;
+`;
+
 	
 const ZReport = () => {
-	const [content, setContent] = React.useState({});
-
-	React.useEffect(() =>{
-		Zfetch();
-	}, []);
+	const [content, setContent] = React.useState(0);
 
 	async function Zfetch() {
-		const response = await fetch('/api/manage/reports/zreport/totalprice', {method: 'GET'})
-
-		const totalprice = await response.json();
-
-		setData(totalprice);
+		try{
+			const response = await fetch('/api/manage/reports/zreport/totalprice', {method: 'GET'})
+			const data = await response.json();
+			setContent(data);
+			console.log(data);
+		}
+		catch(error){
+			console.error(error);
+		}
 	}
 
     return (
@@ -54,10 +62,15 @@ const ZReport = () => {
 
             <Box sx={{ m: 4, display: 'flex' }}>
                 <Button sx={{ ml: 2 }} variant="outlined" onClick={ () => { Zfetch() } }>Generate</Button>
-				{response.map((item) => (
-					<p>{item}</p>
-				))}
             </Box>
+
+			{showBox && (
+				<FadeInBox sx={{ m: 2 }}>
+					<Typography variant="h5" component="h1">
+						The total for this Z reports sales is : {content}.
+					</Typography>
+				</FadeInBox>
+			)}
 
         </React.Fragment>
     )
