@@ -9,7 +9,7 @@ export default async function handler(req, res) {
             image: image,
             description: description,
             price: price,
-        });
+        })
 
         for (const item of ingredients) {
             await Models.ProductIngredients.create({

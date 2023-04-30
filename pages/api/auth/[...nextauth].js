@@ -5,8 +5,8 @@ import * as Models from "sql/models"
 export default NextAuth({
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
         })
     ],
 
