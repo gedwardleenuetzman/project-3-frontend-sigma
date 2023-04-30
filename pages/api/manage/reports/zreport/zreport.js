@@ -1,13 +1,15 @@
-import * as dailyOrders from "sql/models/dailyOrders"
-import * as dailyOrderProducts from "sql/models/dailyOrderProducts"
+import DailyOrders from "sql/models/dailyorders"
 
-export default async function handler(reg, res) {
+export default async function handler(req, res) {
     if(req.method === "GET"){
 
-        const daily = await dailyOrders.findAll();
+        //const t = await db.transaction();
 
-        const totalPrice = daily.reduce((acc, daily) => acc + daily.total_price, 0);
-
-        console.log('Total Price: ', totalPrice);
+        DailyOrders.sum('total_price').then(sum => {
+            console.log('The sum of all totalPrice values is:', sum);
+          }).catch(error => {
+            console.error('Error:', error);
+          });
+        
     }
 }

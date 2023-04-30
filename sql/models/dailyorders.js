@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes } from "sequelize"
 import db from "/sql/db"
 
-export const Orders = db.define('v3_daily_orders', {
+export const DailyOrders = db.define('v3_daily_orders', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -22,4 +22,4 @@ export const Orders = db.define('v3_daily_orders', {
     },
 })
 
-export default Orders
+export default DailyOrders

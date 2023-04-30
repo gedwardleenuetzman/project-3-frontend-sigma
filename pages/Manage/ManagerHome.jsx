@@ -125,7 +125,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Enter</Button>
+                                <Button size="small" href="/Manage/ZReport">Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
