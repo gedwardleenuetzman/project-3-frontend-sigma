@@ -6,6 +6,7 @@ import StandardAppBar from 'src/StandardAppBar'
 import { Box, Typography } from '@mui/material';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import showBox from '@mui/material';
 
 const DIALOG_LAYOUT = [
 	{ name: "name", type: "text" },
