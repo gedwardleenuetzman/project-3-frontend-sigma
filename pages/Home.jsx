@@ -46,9 +46,9 @@ export default function Home() {
             ]}>
             </RouteDrawer>
 
-            <div>
-      <div id="google_translate_element"></div>
-      </div>
+        <div>
+        <div id="google_translate_element"></div>
+        </div>
 
             <div className="home-page">
                 <div className="logo">
