@@ -26,6 +26,8 @@ const DRAWER_LAYOUT = [
 	]
 ]
 
+
+
 const CREATE_DIALOG_INITIAL = {
 	name: "Name",
 	image: "URL",
@@ -36,45 +38,29 @@ const CREATE_DIALOG_INITIAL = {
 const ZReport = () => {
 	const [content, setContent] = React.useState({});
 
-<<<<<<< HEAD
-	React.useEffect(() =>{
+	React.useEffect(() => {
 		Zfetch();
 	}, []);
 
 	async function Zfetch() {
-		const response = await fetch('/api/manage/reports/zreport/totalprice', {method: 'GET'})
+		const response = await fetch('/api/manage/reports/zreport/totalprice', { method: 'GET' })
 
 		const totalprice = await response.json();
 
 		setData(totalprice);
-=======
-	const Zfetch = () => {
-		fetch('/api/manage/reports/zreport/zreport', { method: 'GET' })
-			.then(response => response.json())
-			.then(data => console.log(data))
-			.catch(error => console.error(error));
->>>>>>> 54be58f (orders show up in both tables now)
 	}
 
 	return (
 		<React.Fragment>
 			<StandardAppBar title="Z Report" layout={DRAWER_LAYOUT} />
 
-<<<<<<< HEAD
-            <Box sx={{ m: 4, display: 'flex' }}>
-                <Button sx={{ ml: 2 }} variant="outlined" onClick={ () => { Zfetch() } }>Generate</Button>
-				{response.map((item) => (
-					<p>{item}</p>
-				))}
-            </Box>
-=======
 			<Box sx={{ m: 4, display: 'flex' }}>
 				<Button sx={{ ml: 2 }} variant="outlined" onClick={() => { Zfetch() }}>Generate</Button>
 			</Box>
->>>>>>> 54be58f (orders show up in both tables now)
 
 			<div>
-				<p>Todays sales total: $</p>
+				<ZReport />
+				<p>Todays sales total: {totalprice} $</p>
 			</div>
 
 		</React.Fragment>
