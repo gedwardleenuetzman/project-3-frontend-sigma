@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import { useSession, signIn, signOut, getSession } from "next-auth/react"
 import AccountMenu from '../src/AccountMenu';
@@ -17,6 +17,20 @@ const bodyStyle = {
 export default function Home() {
     const { data: session, status } = useSession()
 
+    useEffect(() => {
+        // Load the Google Translate API script
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        script.async = true;
+        document.body.appendChild(script);
+    
+        // Define the `googleTranslateElementInit` function
+        window.googleTranslateElementInit = () => {
+          new window.google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        };
+      }, []);
+
     // will have map displaying Chick Fil A locations,
     // will have sign in button or avatar button with drop down to navigate
 
@@ -31,6 +45,10 @@ export default function Home() {
                 [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }, { text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
             ]}>
             </RouteDrawer>
+
+            <div>
+      <div id="google_translate_element"></div>
+      </div>
 
             <div className="home-page">
                 <div className="logo">
