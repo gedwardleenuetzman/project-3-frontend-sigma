@@ -43,6 +43,8 @@ const FadeInBox = styled(Box)`
 	
 const ZReport = () => {
 	const [content, setContent] = React.useState(0);
+	const [showBox, setShowBox] = React.useState(false);
+	const [nullBox, setNullBox] = React.useState(false);
 
 	async function Zfetch() {
 		try{
@@ -53,6 +55,13 @@ const ZReport = () => {
 		}
 		catch(error){
 			console.error(error);
+		}
+
+		if(content){
+			setShowBox(true);
+		}
+		else{
+			setNullBox(true);
 		}
 	}
 
@@ -70,6 +79,14 @@ const ZReport = () => {
 						The total for this Z reports sales is : {content}.
 					</Typography>
 				</FadeInBox>
+			)}
+
+			{nullBox && (
+				<FadeInBox sx={{ m: 2 }}>
+					<Typography variant="h5" component="h1">
+						Error in displaying the Z report, value is most likely NULL.
+					</Typography>
+			</FadeInBox>
 			)}
 
         </React.Fragment>
