@@ -1,5 +1,5 @@
 import orderProducts from "sql/models/orderProducts"
-import Ingredients from "sql/models/Ingredients"
+import Ingredients from "sql/models/ingredients"
 
 export default async function handler(req, res) {
     if(req.method === "GET"){
