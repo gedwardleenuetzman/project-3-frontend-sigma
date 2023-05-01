@@ -18,6 +18,7 @@ const DIALOG_LAYOUT = [
 
 const DRAWER_LAYOUT = [
 	[{ text: "Home", route: "/Home" }],
+	[{ text: "Customer Ordering", route: "/CustomerOrder" }],
 	[{ text: "Order", route: "/Order" }],
 	[{ text: "Manage", route: "/Manage" }],
 ]
