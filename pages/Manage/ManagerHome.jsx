@@ -16,11 +16,11 @@ import { styled } from '@mui/material/styles';
 const DRAWER_LAYOUT = [
     [{ text: "Home", route: "/Home" }],
     [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
-    [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+    [{ text: "Server Terminal", route: "/Order" }, { text: "Manage", route: "/Manage" }],
     [
         { text: "Update Inventory", route: "/Manage/UpdateInventory" },
         { text: "Update Menu", route: "/Manage/UpdateMenu" },
-        { text: "Sales Report", route: "/Manage/SalesReport" },
+        { text: "Reports", route: "/Manage/Reports" },
     ]
 ]
 

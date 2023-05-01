@@ -34,8 +34,13 @@ const styles = {
 }
 
 const DRAWER_LAYOUT = [
-	[{text: "Home", route: "/Home"}],
-	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
+    [{ text: "Home", route: "/Home" }],
+    [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
+    [{ text: "Server Terminal", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+    [
+        { text: "Update Inventory", route: "/Manage/UpdateInventory" },
+        { text: "Update Menu", route: "/Manage/UpdateMenu" },
+    ]
 ]
 
 // Define the fade-in animation
