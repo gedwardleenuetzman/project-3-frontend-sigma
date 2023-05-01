@@ -17,18 +17,13 @@ const DRAWER_LAYOUT = [
     [{ text: "Home", route: "/Home" }],
     [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
     [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
-    [
-        { text: "Update Inventory", route: "/Manage/UpdateInventory" },
-        { text: "Update Menu", route: "/Manage/UpdateMenu" },
-        { text: "Sales Report", route: "/Manage/SalesReport" },
-    ]
 ]
 
 const Fade = styled('div')(({ theme }) => ({
     animation: `${theme.transitions.create('opacity', {
-      duration: theme.transitions.duration.standard,
+        duration: theme.transitions.duration.standard,
     })}`,
-  }));
+}));
 
 const Manage = () => {
 
@@ -46,12 +41,7 @@ const Manage = () => {
     return (
         <React.Fragment>
             <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
-<<<<<<< HEAD
-
             <Box sx={{ m: 4 }}>
-=======
-            <Box sx={{m: 4}}>
->>>>>>> ralph
                 <Grid
                     container
                     direction="row"

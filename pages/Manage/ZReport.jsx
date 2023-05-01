@@ -59,8 +59,8 @@ const ZReport = () => {
 			</Box>
 
 			<div>
-				<ZReport />
-				<p>Todays sales total: {totalprice} $</p>
+				<Zfetch />
+				<p>Todays sales total: $</p>
 			</div>
 
 		</React.Fragment>
