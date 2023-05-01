@@ -42,7 +42,7 @@ export default function Home() {
             <RouteDrawer layout={[
                 [{ text: "Home", route: "/Home" }],
 
-                [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }, { text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+                [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }, { text: "Server Terminal", route: "/Order" }, { text: "Manage", route: "/Manage" }],
             ]}>
             </RouteDrawer>
 
