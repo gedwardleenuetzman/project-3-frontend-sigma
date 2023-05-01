@@ -103,9 +103,11 @@ const XZReport = () => {
 
 		if(content){
 			setZShowBox(true);
+			setZNullBox(false);
 		}
 		else{
 			setZNullBox(true);
+			setZShowBox(false);
 		}
 	}
 
@@ -122,9 +124,11 @@ const XZReport = () => {
 
 		if(content){
 			setXShowBox(true);
+			setXNullBox(false);
 		}
 		else{
 			setXNullBox(true);
+			setXShowBox(false);
 		}
 	}
 
@@ -183,5 +187,7 @@ const XZReport = () => {
         </React.Fragment>
     )
 }
+
+
 
 export default DropdownMenu
