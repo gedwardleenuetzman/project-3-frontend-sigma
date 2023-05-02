@@ -7,18 +7,19 @@ const { Op } = require('sequelize');
 export default async function handler(req, res) {
     if(req.method === "GET"){
     try {
+
         const { startDate, endDate } = req.query;
 
         // Query order products within date range
         const OrderProducts = await orderProducts.findAll(
-            // {
-            // where: {
-            //     createdAt: {
-            //     [Op.between]: [start, end],
-            //     },
-            // },
-            // }
-        );
+            {
+            where: {
+                createdAt: {
+                [Op.between]: [startDate, endDate],
+                },
+            },
+            }
+        );  
 
         // Group order products by product ID
         const orderProductsByProductId = {};
@@ -66,7 +67,6 @@ export default async function handler(req, res) {
 
                 for (const orderProduct of OrderProducts) {
                     if (orderProduct.product_id == productId) {
-                        console.log('here');
                         soldQuantity += orderProduct.product_quantity;
                     }
                 }
@@ -90,10 +90,6 @@ export default async function handler(req, res) {
                 const ingredientName = excessReport[ingredientId].name;
                 const soldQuantity = excessReport[ingredientId].sold;
                 const inventoryQuantity = excessReport[ingredientId].inventory;
-
-                console.log('Ingredient Name: ', ingredientName);
-                console.log('Ingredients sold: ', soldQuantity);
-                console.log('Inventory Quantity: ', inventoryQuantity);
 
                 let excessPercentage = soldQuantity / inventoryQuantity;
 

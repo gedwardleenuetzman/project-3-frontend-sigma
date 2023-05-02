@@ -33,6 +33,11 @@ export const orderProducts = db.define('v3_order_products', {
             min: 0
         }
     },
+
+    "createdAt": {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
 })
 
 export default orderProducts

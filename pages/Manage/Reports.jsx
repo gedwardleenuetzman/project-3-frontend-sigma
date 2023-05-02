@@ -71,13 +71,13 @@ const DropdownMenu = () => {
 				<select value={selected} onChange={handleSelect} style={styles.dropdown}>
 					<option value="XZReport" style={styles.option}>Z Report and X Report</option>
 					<option value="ExcessReport" style={styles.option}>Excess Report</option>
-					<option value="block3" style={styles.option}>Sales Report</option>
+					<option value="SalesReport" style={styles.option}>Sales Report</option>
 				</select>
 				</div>
 	
 				{selected === 'XZReport' && <XZReport/>}
 				{selected === 'ExcessReport' && <ExcessReport />}
-				{selected === 'block3' && <Block3 />}
+				{selected === 'SalesReport' && <SalesReport />}
 			</div>
 
 		</React.Fragment>
@@ -209,7 +209,7 @@ const ExcessReport = () => {
 		if (isGenerated) {
 			async function fetchExcessReport() {
 			try {
-				const response = await fetch(`/api/manage/reports/excessreport/inventorysold?start=${startDate}&end=${endDate}`, {method: 'GET'});
+				const response = await fetch(`/api/manage/reports/excessreport/inventorysold?startDate=${startDate}&endDate=${endDate}`, {method: 'GET'});
 				const data = await response.json();
 				setExcessData(data);
 			} catch (error) {
@@ -232,23 +232,30 @@ const ExcessReport = () => {
 	};
 
 	return (
+		<FadeInBox style={{padding: '10px'}}>
 		<div>
-		<h2>Excess Report</h2>
+		<Typography variant="h5" component="h1">
+				Excess Report Generation:
+		</Typography>
 		<div>
-			<label htmlFor="startDate">Start Date:</label>
+			<label htmlFor="startDate">
+				Start Date: 
+			</label>
 			<input type="date" id="startDate" name="startDate" value={startDate} onChange={handleStartDateChange} />
 		</div>
 		<div>
-			<label htmlFor="endDate">End Date:</label>
+			<label htmlFor="endDate">
+				End Date: 
+			</label>
 			<input type="date" id="endDate" name="endDate" value={endDate} onChange={handleEndDateChange} />
 		</div>
 		<ul>
 		<Button sx={{ ml: 2 }} variant="outlined" onClick={handleGenerateClick}>Generate</Button>
-		<Button sx={{ ml: 2 }} variant="outlined" onClick={printExcessData}>Print Data</Button>
+		{/* <Button sx={{ ml: 2 }} variant="outlined" onClick={printExcessData}>Print Data</Button> */}
 		</ul>
 		
 		{isGenerated && (
-        <table>
+        <table style={{padding: '10px',}}>
           <thead>
             <tr>
               <th>Item Name</th>
@@ -261,7 +268,7 @@ const ExcessReport = () => {
                 item.excessPercentage < 10 && (
                   <tr key={item.id}>
                     <td>{item.name}</td>
-                    <td>{item.excessPercentage}%</td>
+                    <td>{item.excessPercentage * 100}%</td>
                   </tr>
                 )
             )
@@ -270,6 +277,94 @@ const ExcessReport = () => {
         </table>
       )}
 	  </div>
+	  </FadeInBox>
+	);
+}
+
+const SalesReport = () => {
+	const [startDate, setStartDate] = useState("2023-04-18");
+	const [endDate, setEndDate] = useState("2023-05-09");
+	const [salesData, setSalesData] = useState(['']);
+	const [isGenerated, setIsGenerated] = useState(false);
+
+	const handleGenerateClick = () => {
+		setIsGenerated(true);
+	};
+
+	useEffect(() => {
+		if (isGenerated) {
+			async function fetchSalesReport() {
+			try {
+				const response = await fetch(`/api/manage/reports/salesreport/salesreport?startDate=${startDate}&endDate=${endDate}`, {method: 'GET'});
+				const data = await response.json();
+				setSalesData(data);
+			} catch (error) {
+				console.error(error);
+			}
+			}
+
+			fetchSalesReport();
+		}
+	}, [isGenerated, startDate, endDate]);
+
+	const handleStartDateChange = (event) => {
+		setStartDate(event.target.value);
+		console.log("Start Date", event.target.value);
+	};
+
+	const handleEndDateChange = (event) => {
+		setEndDate(event.target.value);
+		console.log("End Date", event.target.value);
+	};
+
+	return (
+		<FadeInBox style={{padding: '10px'}}>
+		<div>
+		<Typography variant="h5" component="h1">
+				Sales Report Generation:
+		</Typography>
+		<div>
+			<label htmlFor="startDate">
+				Start Date: 
+			</label>
+			<input type="date" id="startDate" name="startDate" value={startDate} onChange={handleStartDateChange} />
+		</div>
+		<div>
+			<label htmlFor="endDate">
+				End Date: 
+			</label>
+			<input type="date" id="endDate" name="endDate" value={endDate} onChange={handleEndDateChange} />
+		</div>
+		<ul>
+		<Button sx={{ ml: 2 }} variant="outlined" onClick={handleGenerateClick}>Generate</Button>
+		{/* <Button sx={{ ml: 2 }} variant="outlined" onClick={printExcessData}>Print Data</Button> */}
+		</ul>
+		
+		{isGenerated && (
+        <table style={{padding: '10px',}}>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Quantity Sold</th>
+			  <th>Amount of Money</th>
+			</tr>
+          </thead>
+          <tbody>
+        	{salesData.map(
+              (item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.totalQuantity}</td>
+					<td>${item.totalPrice}</td>
+                  </tr>
+                )
+            )
+			}
+          </tbody>
+        </table>
+      )}
+	  </div>
+	  </FadeInBox>
 	);
 }
 
