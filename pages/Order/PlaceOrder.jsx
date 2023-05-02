@@ -4,30 +4,14 @@ import { Pagination, Grid, Box, Button } from '@mui/material'
 
 import StandardAppBar from 'src/StandardAppBar'
 import SearchBar from 'src/SearchBar'
-
+import CartDrawer from 'src/CartDrawer'
 import SearchCard from 'src/SearchCard'
-import DialogForm from 'src/DialogForm'
-
-const DIALOG_LAYOUT = [
-	// { name: "server_id", type: "number" },
-	// // {name: "product_details", type: "text"},
-	// { name: "product_id", type: "number" },
-	// { name: "product_quantity", type: "number" },
-	// { name: "product_price", type: "number" },
-]
 
 const DRAWER_LAYOUT = [
     [{ text: "Home", route: "/Home" }],
     [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
     [{ text: "Manage", route: "/Manage" }],
 ]
-
-const CREATE_DIALOG_INITIAL = {
-	name: "Name",
-	image: "URL",
-	quantity: 0,
-	threshold: 0
-}
 
 // const productInfo = async (filter, page) =>
 // 	await (await fetch('/api/'))
@@ -39,51 +23,95 @@ const PlaceOrder = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
-	const [count, setCount] = React.useState(0)
 
-	const [open, setOpen] = React.useState(false)
-	const [mode, setMode] = React.useState("create")
-	const [editing, setEditing] = React.useState({})
-	const [id, setId] = React.useState(-1)
+	const [order, setOrder] = React.useState([])
 
 	React.useEffect(() => {
 		fetchContent(filter, page).then(setContent)
-	}, [filter, page, count]);
+	}, [filter, page]);
 
-	const onAction = (action, form) => {
-		setOpen(false)
+	const addToOrder = (item) => {
+		let entry = [...order]
 
-		let url = ''
-		let content = { headers: { 'Content-Type': 'application/json' } }
-
-		if (mode == "create" && action == "Create") {
-			url = '/api/order/placeorder'
-			content.method = 'POST'
-			content.body = JSON.stringify({ ...form })
+		for (let i = 0; i < entry.length; i++) {
+			if (entry[i].item.id == item.id) {
+				entry[i] = {...entry[i]}
+				entry[i].quantity += 1
+				setOrder(entry)
+				return
+			}
 		}
 
-		fetch(url, content).finally(() => {
-			setCount(count + 1)
+		entry.push({
+			item: item,
+			quantity: 1,
 		})
+
+		setOrder(entry)
+	}
+	
+	const incrementOrder = (i) => {
+		let entry = [...order]
+		entry[i] = {...entry[i]}
+		entry[i].quantity += 1
+		setOrder(entry)
+	}
+	
+	const decrementOrder = (i) => {
+		let entry = [...order]
+
+		if (entry[i].quantity - 1 == 0) {
+			entry.splice(i, 1)
+			setOrder(entry)
+		} else {
+			entry[i] = {...entry[i]}
+			entry[i].quantity -= 1
+			setOrder(entry)
+		}
+	}
+
+	const formatOrder = () => {
+		let entry = [...order]
+
+		for (let i = 0; i < entry.length; i++) {
+			entry[i] = {
+				quantity: entity[i].quantity,
+				id: entity[i].item.id,
+			}
+		}
+
+		return entry
+	}
+
+	const placeOrder = async () => {
+		fetch(`/api/order/placeorder`, {
+			headers: {'Content-Type': 'application/json'},
+			method: 'POST',
+			body: JSON.stringify(formatOrder())
+		})
+		.then(() => {
+
+		})
+		.finally(() => {
+
+		})
+
+		setOrder([])
 	}
 
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Place Order" layout={DRAWER_LAYOUT} />
-
-			<DialogForm
-				open={open}
-				layout={DIALOG_LAYOUT}
-				onAction={onAction}
-				onClose={() => setOpen(false)}
-				//initial={mode == "edit" ? editing : CREATE_DIALOG_INITIAL}
-				title="Place Order"
-				actions={["Create", "Cancel"]}
-			/>
+			<StandardAppBar title="Place Order" layout={DRAWER_LAYOUT}>
+				<CartDrawer 
+					order={ order } 
+					onIncrement={incrementOrder}
+					onDecrement={decrementOrder}
+					onOrder={placeOrder}
+				/>
+			</StandardAppBar>
 
 			<Box sx={{ m: 4, display: 'flex' }}>
 				<SearchBar onSearch={(val) => setFilter(val)} />
-				<Button sx={{ ml: 2 }} variant="outlined" onClick={() => { setMode("create"); setOpen(true) }}>Place</Button>
 			</Box>
 
 			<Pagination
@@ -104,8 +132,9 @@ const PlaceOrder = () => {
 								image={row.image}
 								description={row.quantity}
 								actions={["Add"]}
-								onAction={() => { setId(row.id); setOpen(true) }} // does the thing when you press add
-
+								onAction={() => {
+									addToOrder(row)
+								}}
 							/>
 						</Grid>
 					))}
