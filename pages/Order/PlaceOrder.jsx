@@ -75,8 +75,8 @@ const PlaceOrder = () => {
 
 		for (let i = 0; i < entry.length; i++) {
 			entry[i] = {
-				quantity: entity[i].quantity,
-				id: entity[i].item.id,
+				quantity: entry[i].quantity,
+				id: entry[i].item.id,
 			}
 		}
 
@@ -128,9 +128,9 @@ const PlaceOrder = () => {
 					{content.rows && content.rows.map((row, index) => (
 						<Grid key={index} item xs="auto">
 							<SearchCard
-								name={row.name}
-								image={row.image}
-								description={row.quantity}
+                                name={row.name}
+                                image={row.image}
+                                description={"$" + row.price + " - " + row.description}
 								actions={["Add"]}
 								onAction={() => {
 									addToOrder(row)
