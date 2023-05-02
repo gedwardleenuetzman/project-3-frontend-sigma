@@ -13,16 +13,18 @@ import Typography from '@mui/material/Typography';
 import { auto } from '@popperjs/core';
 import { styled } from '@mui/material/styles';
 
-const DRAWER_LAYOUT = [
-    [{ text: "Home", route: "/Home" }],
-    [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
-    [{ text: "Server Terminal", route: "/Order" }, { text: "Manage", route: "/Manage" }],
-    [
-        { text: "Update Inventory", route: "/Manage/UpdateInventory" },
-        { text: "Update Menu", route: "/Manage/UpdateMenu" },
-        { text: "Reports", route: "/Manage/Reports" },
-    ]
-]
+// const DRAWER_LAYOUT = [
+//     [{ text: "Home", route: "/Home" }],
+//     [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
+//     [{ text: "Server Terminal", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+//     [
+//         { text: "Update Inventory", route: "/Manage/UpdateInventory" },
+//         { text: "Update Menu", route: "/Manage/UpdateMenu" },
+//         { text: "Reports", route: "/Manage/Reports" },
+//     ]
+// ]
+
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
 const Fade = styled('div')(({ theme }) => ({
     animation: `${theme.transitions.create('opacity', {
@@ -45,7 +47,7 @@ const Manage = () => {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
+            <StandardAppBar title="Manager" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
             <Box sx={{m: 4}}>
                 <Grid
                     container
@@ -72,7 +74,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="medium" href="/Manage/UpdateInventory" style={styles.button}>Enter</Button>
+                                <Button size="medium" href="/Manage/Inventory" style={styles.button}>Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -93,7 +95,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="medium" href="/Manage/UpdateInventory" style={styles.button}>Enter</Button>
+                                <Button size="medium" href="/Manage/Menu" style={styles.button}>Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
