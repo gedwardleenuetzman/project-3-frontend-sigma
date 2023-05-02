@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
 import AccountMenu from 'src/AccountMenu'
 import RouteDrawer from 'src/RouteDrawer'
 
-const StandardAppBar = ({ layout, title }) => {
+const StandardAppBar = ({ layout, title, children }) => {
     return (
         <React.Fragment>
             <AppBar position="fixed">
@@ -17,6 +17,8 @@ const StandardAppBar = ({ layout, title }) => {
 
                     <AccountMenu/>
 
+                    { children }
+                    
                 </Toolbar>
             </AppBar>
 
