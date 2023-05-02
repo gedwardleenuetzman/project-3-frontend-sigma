@@ -17,11 +17,6 @@ const DRAWER_LAYOUT = [
     [{ text: "Home", route: "/Home" }],
     [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
     [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
-    [
-        { text: "Update Inventory", route: "/Manage/UpdateInventory" },
-        { text: "Update Menu", route: "/Manage/UpdateMenu" },
-        { text: "Sales Report", route: "/Manage/SalesReport" },
-    ]
 ]
 
 const Fade = styled('div')(({ theme }) => ({
@@ -36,10 +31,10 @@ const Manage = () => {
         media: {
             height: '100px',
             width: '100px',
-            margin: auto,
+            margin: 'auto',
         },
         button: {
-            margin:auto
+            margin: 'auto',
         }
     };
 
@@ -59,10 +54,10 @@ const Manage = () => {
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <CardMedia
+                                    style={styles.media}
                                     component="img"
                                     image="https://www.pngall.com/wp-content/uploads/5/Box.png"
                                     alt="Update Inventory Box image"
-                                    style={styles.media}
                                 />
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Update Inventory
@@ -80,10 +75,10 @@ const Manage = () => {
                         <   Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <CardMedia
+                                    style={styles.media}
                                     component="img"
                                     image="https://cdn-icons-png.flaticon.com/512/151/151409.png"
                                     alt="Update Menu image"
-                                    style={styles.media}
                                 />
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Update Menu
@@ -101,10 +96,10 @@ const Manage = () => {
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <CardMedia
+                                    style={styles.media}
                                     component="img"
                                     image="https://cdn-icons-png.flaticon.com/512/3731/3731754.png"
                                     alt="Z Report Image"
-                                    style={styles.media}
                                 />
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Manager Reports
@@ -114,7 +109,7 @@ const Manage = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="medium" href="/Manage/Reports">Enter</Button>
+                                <Button size="medium" href="/Manage/Reports" style={styles.button}>Enter</Button>
                             </CardActions>
                         </Card>
                     </Grid>
