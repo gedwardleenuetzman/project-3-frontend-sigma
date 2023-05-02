@@ -76,7 +76,7 @@ const UpdateInventory = () => {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Update Inventory" layout={ DRAWER_LAYOUT }/>
+            <StandardAppBar title="Excess Report" layout={ DRAWER_LAYOUT }/>
 
 			<DialogForm 
 				open={ open } 

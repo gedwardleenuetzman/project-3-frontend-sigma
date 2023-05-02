@@ -6,6 +6,7 @@ export * from "./products";
 export * from "./productIngredients";
 export * from "./orders";
 export * from "./orderProducts";
+export * from "./textFiles";
 
 // console.log("syncing sequelize database")
 

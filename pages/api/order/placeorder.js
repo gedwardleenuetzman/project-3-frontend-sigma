@@ -1,13 +1,15 @@
 import db from "/sql/db"
 import Orders from "/sql/models/orders"
+import DailyOrders from "/sql/models/dailyorders"
 import orderProducts from "/sql/models/orderProducts"
+import dailyOrderProducts from "/sql/models/dailyorderproducts"
 import Ingredients from "/sql/models/ingredients"
 import ProductIngredients from "/sql/models/productIngredients"
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    //const { server_id, product_details } = req.body
-    const { server_id, product_details } = { server_id: req.body.server_id, product_details: { product_id: req.body.product_id, product_quantity: req.body.product_quantity, product_price: req.body.product_price } }
+    // const { server_id, product_details } = req.body;
+    const { server_id, product_details } = { server_id: 0, product_details: [{ product_id: 1, product_quantity: 1, product_price: 5.00 },] }
     // above are hardcoded values to illustrate data structure that this file needs.
     console.log("Body:")
     console.log(server_id, product_details);
@@ -18,6 +20,7 @@ export default async function handler(req, res) {
     try {
       // Create the order in the orders table
       const order = await Orders.create({ server_id: server_id, total_price: 0 }, { transaction: t });
+      const daily_order = await DailyOrders.create({ server_id: server_id, total_price: 0 }, { transaction: t });
 
       // Update the order_products table with the product details and order ID
       let total_price = 0;
@@ -62,10 +65,19 @@ export default async function handler(req, res) {
           product_total_price: product_total_price,
           order_id: order.id,
         }, { transaction: t });
+
+        await dailyOrderProducts.create({
+          product_id: product_id,
+          product_quantity: product_quantity,
+          product_price: product_price,
+          product_total_price: product_total_price,
+          order_id: order.id,
+        }, { transaction: t });
       }
 
       // Update the total price of the order in the orders table
       await order.update({ total_price: total_price }, { transaction: t });
+      await daily_order.update({ total_price: total_price }, { transaction: t });
 
       // Commit the transaction
       await t.commit();

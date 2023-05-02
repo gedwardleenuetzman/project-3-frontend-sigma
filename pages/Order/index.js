@@ -1,12 +1,12 @@
 export default function index() {
-    return <></>
+  return <></>
 }
 
 export async function getServerSideProps() {
-    return {
-      redirect: {
-        destination: '/Order/PlaceOrder',
-        permanent: true,
-      },
-    };
-  }
+  return {
+    redirect: {
+      destination: '/Order/PlaceOrder',
+      permanent: true,
+    },
+  };
+}

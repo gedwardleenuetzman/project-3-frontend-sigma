@@ -16,6 +16,7 @@
         "@emotion/styled": "latest",
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
+        "@react-google-maps/api": "^2.18.1",
         "immutable": "^4.3.0",
         "next": "latest",
         "next-auth": "latest",
@@ -23,7 +24,9 @@
         "prop-types": "latest",
         "react": "latest",
         "react-dom": "latest",
-        "sequelize": "latest"
+        "react-router-dom": "^6.10.0",
+        "sequelize": "latest",
+        "webfontloader": "^1.6.28"
     },
     "devDependencies": {
         "eslint": "latest",
