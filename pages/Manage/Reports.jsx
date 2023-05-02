@@ -5,6 +5,8 @@ import { Box, Typography } from '@mui/material';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
+
 const styles = {
 	dropdown: {
 		border: 'none',
@@ -33,6 +35,7 @@ const styles = {
 	}
 }
 
+<<<<<<< HEAD
 const DRAWER_LAYOUT = [
 	[{ text: "Home", route: "/Home" }],
 	[{ text: "Customer Order", route: "/CustomerOrder/CustomerOrder" }],
@@ -40,6 +43,8 @@ const DRAWER_LAYOUT = [
 	{ text: "Manage", route: "/Manage" }],
 ]
 
+=======
+>>>>>>> main
 // Define the fade-in animation
 const fadeIn = keyframes`
   from {
@@ -64,9 +69,15 @@ const DropdownMenu = () => {
 
 	return (
 		<React.Fragment>
+<<<<<<< HEAD
 			<StandardAppBar title="Z Report" layout={DRAWER_LAYOUT} />
 
 			<div>
+=======
+			<StandardAppBar title="Z Report" layout={ MANAGE_ROUTE_DRAWER_LAYOUT }/>
+			
+      		<div>
+>>>>>>> main
 				<div style={{ padding: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
 					<select value={selected} onChange={handleSelect} style={styles.dropdown}>
@@ -137,9 +148,15 @@ const XZReport = () => {
 	return (
 		<React.Fragment>
 			<FadeInBox sx={{ m: 2 }}>
+<<<<<<< HEAD
 				<StandardAppBar title="Z Report" layout={DRAWER_LAYOUT} />
 
 				<Typography variant="h5" component="h1">
+=======
+            <StandardAppBar title="Z Report" layout={ MANAGE_ROUTE_DRAWER_LAYOUT }/>
+			
+			<Typography variant="h5" component="h1">
+>>>>>>> main
 					Z Report Generation:
 				</Typography>
 				<Box sx={{ m: 4, display: 'flex' }}>
