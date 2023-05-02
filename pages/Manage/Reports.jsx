@@ -60,7 +60,7 @@ const DropdownMenu = () => {
 
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Manager Reports" layout={ DRAWER_LAYOUT }/>
+			<StandardAppBar title="Manager Reports" layout={ MANAGE_ROUTE_DRAWER_LAYOUT }/>
 			
       		<div>
 				<div style={{ padding: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

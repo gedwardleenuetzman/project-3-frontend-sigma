@@ -40,7 +40,7 @@ const Manage = () => {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Manager" layout={DRAWER_LAYOUT} />
+            <StandardAppBar title="Manager" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
             <Box sx={{m: 4}}>
                 <Grid
                 container
