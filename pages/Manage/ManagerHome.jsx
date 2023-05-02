@@ -13,11 +13,13 @@ import Typography from '@mui/material/Typography';
 import { auto } from '@popperjs/core';
 import { styled } from '@mui/material/styles';
 
-const DRAWER_LAYOUT = [
-    [{ text: "Home", route: "/Home" }],
-    [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
-    [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
-]
+// const DRAWER_LAYOUT = [
+//     [{ text: "Home", route: "/Home" }],
+//     [{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
+//     [{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
+// ]
+
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
 const Fade = styled('div')(({ theme }) => ({
     animation: `${theme.transitions.create('opacity', {
@@ -40,7 +42,7 @@ const Manage = () => {
 
     return (
         <React.Fragment>
-            <StandardAppBar title="Manager" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+            <StandardAppBar title="Manager" layout={ MANAGE_ROUTE_DRAWER_LAYOUT } />
             <Box sx={{m: 4}}>
                 <Grid
                 container
