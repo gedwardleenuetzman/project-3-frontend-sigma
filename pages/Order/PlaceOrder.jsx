@@ -17,7 +17,7 @@ const DRAWER_LAYOUT = [
 // 	await (await fetch('/api/'))
 
 const fetchContent = async (filter, page) =>
-	await (await fetch(`/api/manage/menu/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
+	await (await fetch(`/api/manage/menu/filter=${filter}&page=${page}`, { method: "GET" })).json()
 
 const PlaceOrder = () => {
 	const [page, setPage] = React.useState(1)
