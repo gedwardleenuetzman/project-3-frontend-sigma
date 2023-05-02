@@ -72,12 +72,14 @@ const DropdownMenu = () => {
 					<option value="XZReport" style={styles.option}>Z Report and X Report</option>
 					<option value="ExcessReport" style={styles.option}>Excess Report</option>
 					<option value="SalesReport" style={styles.option}>Sales Report</option>
+					<option value="RestockReport" style={styles.option}>Restock Report</option>
 				</select>
 				</div>
 	
 				{selected === 'XZReport' && <XZReport/>}
 				{selected === 'ExcessReport' && <ExcessReport />}
 				{selected === 'SalesReport' && <SalesReport />}
+				{selected === 'RestockReport' && <RestockReport />}
 			</div>
 
 		</React.Fragment>
@@ -356,6 +358,68 @@ const SalesReport = () => {
                     <td>{item.name}</td>
                     <td>{item.totalQuantity}</td>
 					<td>${item.totalPrice}</td>
+                  </tr>
+                )
+            )
+			}
+          </tbody>
+        </table>
+      )}
+	  </div>
+	  </FadeInBox>
+	);
+}
+
+const RestockReport = () => {
+	const [restockData, setRestockData] = useState(['']);
+	const [isGenerated, setIsGenerated] = useState(false);
+
+	const handleGenerateClick = () => {
+		setIsGenerated(true);
+	};
+
+	if (isGenerated) {
+		async function fetchSalesReport() {
+			try {
+				const response = await fetch(`/api/manage/reports/restockreport/ingredientrestock`, {method: 'GET'});
+				const data = await response.json();
+				setRestockData(data);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		fetchSalesReport();
+	}
+
+	return (
+		<FadeInBox style={{padding: '10px'}}>
+		<div>
+		<Typography variant="h5" component="h1">
+				Restock Report Generation:
+		</Typography>
+		
+		<ul>
+		<Button sx={{ ml: 2 }} variant="outlined" onClick={handleGenerateClick}>Generate</Button>
+		{/* <Button sx={{ ml: 2 }} variant="outlined" onClick={printExcessData}>Print Data</Button> */}
+		</ul>
+		
+		{isGenerated && (
+        <table style={{padding: '10px',}}>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Amount in Stock</th>
+			  <th>Threshold Amount</th>
+			</tr>
+          </thead>
+          <tbody>
+        	{restockData.map(
+              (item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.quantity}</td>
+					<td>{item.threshold}</td>
                   </tr>
                 )
             )

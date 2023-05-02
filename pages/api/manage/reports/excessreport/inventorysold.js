@@ -19,7 +19,7 @@ export default async function handler(req, res) {
                 },
             },
             }
-        );  
+        );
 
         // Group order products by product ID
         const orderProductsByProductId = {};
