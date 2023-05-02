@@ -6,6 +6,8 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useState, useEffect } from "react";
 
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
+
 const styles = {
 	dropdown:{
 		border: 'none',
@@ -33,11 +35,6 @@ const styles = {
 		MozAppearance: 'none',
 	}
 }
-
-const DRAWER_LAYOUT = [
-	[{text: "Home", route: "/Home"}],
-	[{text: "Order", route: "/Order"}, {text: "Manage", route: "/Manage"}],
-]
 
 // Define the fade-in animation
 const fadeIn = keyframes`

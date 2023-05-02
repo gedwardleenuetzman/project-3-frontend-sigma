@@ -6,13 +6,9 @@ import { getServerSession } from "next-auth/next"
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const session = await getServerSession(req, res, authOptions)
 
-    if (!session) {
-      return res.status(401).json({ error: 'You must be authenticated to access this resource.' });
-    }
-
-    const server_id = (await Models.Users.findOne({ where: { email: session.user.email } })).id
+    // const server_id = (await Models.Users.findOne({ where: { email: session.user.email } })).id
+    const server_id = -1;
     const t = await db.transaction();
 
     try {

@@ -10,10 +10,6 @@ import styles from './Order';
 import image from './cfaLogo.png';
 import '../src/styles/home.module.css'
 
-
-
-
-
 import createEmotionCache from '../src/createEmotionCache';
 
 // Client-side cache, shared for the whole session of the user in the browser.

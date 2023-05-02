@@ -7,47 +7,27 @@ import SearchBar from 'src/SearchBar'
 
 import SearchCard from 'src/SearchCard'
 import DialogForm from 'src/DialogForm'
-import IngredientTable from 'src/IngredientTable'
+
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
 const DIALOG_LAYOUT = [
 	{ name: "name", type: "text" },
-	{ name: "description", type: "text" },
 	{ name: "image", type: "text" },
-	{ name: "price", type: "number" },
-]
-
-const DRAWER_LAYOUT = [
-	[{ text: "Home", route: "/Home" }],
-	[{ text: "Customer Ordering", route: "/CustomerOrder/CustomerOrder" }],
-	[{ text: "Order", route: "/Order" }, { text: "Manage", route: "/Manage" }],
-	[
-		{ text: "Update Inventory", route: "/Manage/UpdateInventory" },
-		{ text: "Update Menu", route: "/Manage/UpdateMenu" },
-		{ text: "Sales Report", route: "/Manage/SalesReport" },
-	]
+	{ name: "threshold", type: "number" },
+	{ name: "quantity", type: "number" },
 ]
 
 const CREATE_DIALOG_INITIAL = {
 	name: "Name",
 	image: "URL",
-	description: "Description",
-	price: 1,
+	quantity: 0,
+	threshold: 0
 }
 
 const fetchContent = async (filter, page) =>
-	await (await fetch(`/api/manage/menu/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
+	await (await fetch(`/api/manage/inventory/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
 
-const formatIngredients = (data) => {
-	let ingredients = []
-
-	data.forEach((row) => {
-		ingredients.push({ id: row.ingredient.id, quantity: row.quantity })
-	})
-
-	return ingredients
-}
-
-const UpdateMenu = () => {
+const UpdateInventory = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
@@ -56,7 +36,6 @@ const UpdateMenu = () => {
 	const [open, setOpen] = React.useState(false)
 	const [mode, setMode] = React.useState("create")
 	const [editing, setEditing] = React.useState({})
-	const [ingredients, setIngredients] = React.useState([])
 
 	React.useEffect(() => {
 		fetchContent(filter, page).then(setContent)
@@ -69,15 +48,15 @@ const UpdateMenu = () => {
 		let content = { headers: { 'Content-Type': 'application/json' } }
 
 		if (mode == "create" && action == "Create") {
-			url = '/api/manage/menu/create'
+			url = '/api/manage/inventory/create'
 			content.method = 'POST'
-			content.body = JSON.stringify({ ...form, ingredients })
+			content.body = JSON.stringify({ ...form })
 		} else if (mode == "edit" && action == "Save") {
-			url = '/api/manage/menu/update'
+			url = '/api/manage/inventory/update'
 			content.method = 'PUT'
-			content.body = JSON.stringify({ ...editing, ...form, ingredients })
+			content.body = JSON.stringify({ ...editing, ...form })
 		} else if (mode == "edit" && action == "Delete") {
-			url = '/api/manage/menu/remove'
+			url = '/api/manage/inventory/remove'
 			content.method = 'PUT'
 			content.body = JSON.stringify({ id: editing.id })
 		}
@@ -87,13 +66,9 @@ const UpdateMenu = () => {
 		})
 	}
 
-	const handleIngredients = (form) => {
-		setIngredients(formatIngredients(form))
-	}
-
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Update Menu" layout={DRAWER_LAYOUT} />
+			<StandardAppBar title="Manage Inventory" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
 			<DialogForm
 				open={open}
@@ -101,14 +76,9 @@ const UpdateMenu = () => {
 				onAction={onAction}
 				onClose={() => setOpen(false)}
 				initial={mode == "edit" ? editing : CREATE_DIALOG_INITIAL}
-				title={mode == "create" ? "Create Product" : "Edit Product"}
+				title={mode == "create" ? "Create Ingredient" : "Edit Ingredient"}
 				actions={mode == "create" ? ["Create", "Cancel"] : ["Save", "Delete", "Cancel"]}
-			>
-				<IngredientTable
-					initial={editing.ingredients}
-					onChange={handleIngredients}
-				/>
-			</DialogForm>
+			/>
 
 			<Box sx={{ m: 4, display: 'flex' }}>
 				<SearchBar onSearch={(val) => setFilter(val)} />
@@ -131,7 +101,7 @@ const UpdateMenu = () => {
 							<SearchCard
 								name={row.name}
 								image={row.image}
-								description={"$" + row.price + " - " + row.description}
+								description={row.quantity}
 								actions={["Edit"]}
 								onAction={() => { setMode("edit"); setOpen(true); setEditing({ ...row }) }}
 							/>
@@ -144,4 +114,4 @@ const UpdateMenu = () => {
 	)
 }
 
-export default UpdateMenu
+export default UpdateInventory
