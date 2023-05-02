@@ -1,4 +1,3 @@
-
 const MANAGE_ROUTE_DRAWER_LAYOUT = [
 	[
         {
