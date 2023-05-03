@@ -24,10 +24,10 @@ export default function RouteDrawer(props) {
                 {props.layout.map((items, groupIndex) => (
                     <React.Fragment key={groupIndex}>
                         {items.map((item, itemIndex) => {
-                            if (!item.tags || (props.tags && item.tags.some(tag => props.tags.includes(tag)))) {
+                            if ((!item.showWhenRouteStartsWith || router.pathname.startsWith(item.showWhenRouteStartsWith)) && (!item.tags || !props.tags || (props.tags && item.tags.some(tag => props.tags.includes(tag))))) {
                                 return (
                                     <ListItem key={itemIndex} disablePadding>
-                                        <ListItemButton href={item.route} selected={router.pathname.startsWith(item.route)}>
+                                        <ListItemButton href={item.route} selected={router.pathname == item.route}>
                                         <ListItemText primary={item.text}/>
                                         </ListItemButton>
                                     </ListItem>
