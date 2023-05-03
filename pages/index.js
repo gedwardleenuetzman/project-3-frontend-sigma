@@ -1,17 +1,21 @@
 import React from 'react';
 
+import * as Models from "sql/models"
+
 import { Typography, Pagination, Grid, Box, Button, Container, Paper, Card } from '@mui/material'
 
 import StandardAppBar from 'src/StandardAppBar'
 import RouteDetailer from 'src/RouteDetailer'
 
+import { getSession } from "next-auth/react"
+
 import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
-const Home = () => {
+const Home = ({tags}) => {
   return (
     <React.Fragment>
       
-      <StandardAppBar title="Home" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+      <StandardAppBar title="Home" tags={tags} layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
       <Box sx={{ display: 'flex', height: '100%', m: 3 }}>
         <Box sx={{ width: '50%', height: '100%' }}>
@@ -29,29 +33,59 @@ const Home = () => {
           </Card>
         </Box>
         <Box sx={{ ml: 3, width: '50%' }}>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d54925.97740322061!2d-96.38542732064194!3d30.63752001205226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1schick%20fil%20a!5e0!3m2!1sen!2sus!4v1682797802748!5m2!1sen!2sus"
-              width="100%"
-              height="100%"
-              style={{ border: "0", borderRadius: "1%" }}
-              loading="lazy"
-              >
-            </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d54925.97740322061!2d-96.38542732064194!3d30.63752001205226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1schick%20fil%20a!5e0!3m2!1sen!2sus!4v1682797802748!5m2!1sen!2sus"
+            width="100%"
+            height="100%"
+            style={{ border: "0", borderRadius: "1%" }}
+            loading="lazy"
+            >
+          </iframe>
         </Box>
       </Box>
 
       <Box sx={{m: 3}}>
-                <RouteDetailer layout={[
-                    {  
-                        title: "Order", 
-                        desc: "Order something from one of our restaurants right now!", 
-                        route: "/Order/Customer", 
-                        image: ""
-                    },
-                ]}/>
-            </Box>
+        <RouteDetailer layout={[
+          {  
+              title: "Order", 
+              desc: "Order something from one of our restaurants right now!", 
+              route: "/Order/Customer", 
+              image: ""
+          },
+        ]}/>
+      </Box>
 
     </React.Fragment>
   )
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      props: {
+        tags: [],
+      }
+    };
+  }
+
+  const user = await Models.Users.findOne({ where: { email: session.user.email } })
+
+  let tags = []
+
+  if (user.manager_permissions) {
+    tags.push('manage')
+  }
+
+  if (user.server_permissions) {
+    tags.push('server')
+  }
+
+  return {
+    props: {
+      tags: tags,
+    },
+  };
 }
 
 export default Home

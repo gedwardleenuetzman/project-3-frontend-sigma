@@ -16,18 +16,25 @@ export default function RouteDrawer(props) {
         setOpen(b)
     };
 
+    console.log(props.tags)
+
     const list = () => (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
                 {props.layout.map((items, groupIndex) => (
                     <React.Fragment key={groupIndex}>
-                        {items.map((item, itemIndex) => (
-                            <ListItem key={itemIndex} disablePadding>
-                                <ListItemButton href={item.route} selected={router.pathname.startsWith(item.route)}>
-                                    <ListItemText primary={item.text}/>
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
+                        {items.map((item, itemIndex) => {
+                            if (!item.tags || (props.tags && item.tags.some(tag => props.tags.includes(tag)))) {
+                                return (
+                                    <ListItem key={itemIndex} disablePadding>
+                                        <ListItemButton href={item.route} selected={router.pathname.startsWith(item.route)}>
+                                        <ListItemText primary={item.text}/>
+                                        </ListItemButton>
+                                    </ListItem>
+                                );
+                            }
+                            return null;
+                        })}
                         <Divider/>
                     </React.Fragment>
                 ))}

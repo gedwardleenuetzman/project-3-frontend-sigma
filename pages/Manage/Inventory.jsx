@@ -68,7 +68,7 @@ const UpdateInventory = () => {
 
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Manage Inventory" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+			<StandardAppBar title="Manage Inventory" tags={['manage']} layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
 			<DialogForm
 				open={open}
