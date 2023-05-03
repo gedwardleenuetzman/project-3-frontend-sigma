@@ -9,17 +9,15 @@ import SearchCard from 'src/SearchCard'
 
 const DRAWER_LAYOUT = [
     [{ text: "Home", route: "/Home" }],
-    [{ text: "Customer Ordering", route: "/CustomerOrder" }],
-    [{ text: "Manage", route: "/Manage" }],
 ]
 
 // const productInfo = async (filter, page) =>
 // 	await (await fetch('/api/'))
 
 const fetchContent = async (filter, page) =>
-	await (await fetch(`/api/manage/menu`, { method: "GET" })).json()
+	await (await fetch(`/api/manage/menu/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
 
-const PlaceOrder = () => {
+const CustomerOrder = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
@@ -84,7 +82,7 @@ const PlaceOrder = () => {
 	}
 
 	const placeOrder = async () => {
-		fetch(`/api/order/placeorder`, {
+		fetch(`/api/order/customerorder`, {
 			headers: {'Content-Type': 'application/json'},
 			method: 'POST',
 			body: JSON.stringify(formatOrder())
@@ -145,4 +143,4 @@ const PlaceOrder = () => {
 	)
 }
 
-export default PlaceOrder
+export default CustomerOrder
