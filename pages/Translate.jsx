@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 
 // THIS IS EXAMPLE CODE FOR THE TRANSLATE IMPLEMENTATION. COPYING THESE 2 BLOCKS INTO ANY PAGE WILL ADD THE WORKING TRANSLATE WIDGET.
-
+/**
+ * 
+ * @returns The translate function that works across the website. 
+ */
 function MyComponent() {
   useEffect(() => {
     // Load the Google Translate API script

@@ -4,6 +4,12 @@ import * as Models from "sql/models"
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { getServerSession } from "next-auth/next"
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns The order placed in both the server and customer side. 
+ */
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const session = await getServerSession(req, res, authOptions)
@@ -57,7 +63,7 @@ export default async function handler(req, res) {
           product_total_price: total_price,
           order_id: order.id,
         }, { transaction: t });
-        
+
         await Models.DailyOrderProducts.create({
           product_id: product.id,
           product_quantity: item.quantity,
@@ -66,7 +72,7 @@ export default async function handler(req, res) {
           order_id: order.id,
         }, { transaction: t });
       }
-      
+
       // Update the total price of the order in the orders table
       await order.update({ total_price: total_price }, { transaction: t });
       await daily_order.update({ total_price: total_price }, { transaction: t });

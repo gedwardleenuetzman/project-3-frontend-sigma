@@ -1,5 +1,11 @@
 import DailyOrders from "sql/models/dailyorders"
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Provides the total price for both the X and Z reports
+ */
 export default async function handler(req, res) {
     if (req.method === "GET") {
         try {

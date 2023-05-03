@@ -27,6 +27,10 @@ const CREATE_DIALOG_INITIAL = {
 const fetchContent = async (filter, page) =>
 	await (await fetch(`/api/manage/inventory/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
 
+/**
+ * 
+ * @returns The updated inventory
+ */
 const UpdateInventory = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
@@ -41,6 +45,14 @@ const UpdateInventory = () => {
 		fetchContent(filter, page).then(setContent)
 	}, [filter, page, count]);
 
+
+	/**
+	 * 
+	 * @param {*} action 
+	 * @param {*} form 
+	 * Depending on the action given, the button will sent a 
+	 * form to the proper function call
+	 */
 	const onAction = (action, form) => {
 		setOpen(false)
 

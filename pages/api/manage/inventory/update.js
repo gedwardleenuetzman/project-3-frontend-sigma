@@ -1,12 +1,18 @@
 import * as Models from "sql/models"
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Update the prompted table with the new item information
+ */
 export default async function handler(req, res) {
     if (req.method === 'PUT') {
         const { id, name, description, image, threshold, quantity } = req.body;
         const item = await Models.Ingredients.findByPk(id);
 
         if (item) {
-            await item.update({ 
+            await item.update({
                 name: name,
                 description: description,
                 image: image,

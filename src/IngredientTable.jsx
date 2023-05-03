@@ -5,7 +5,12 @@ import { Clear as ClearIcon, Add as AddIcon } from '@mui/icons-material';
 
 import AutocompleteWithQuery from 'src/AutocompleteWithQuery';
 
-const IngredientTable = ({ initial=[], onChange }) => {
+/**
+ * 
+ * @param {*} param0 
+ * @returns The ingredient table query that is used to show the menu items for each page that it is called upon
+ */
+const IngredientTable = ({ initial = [], onChange }) => {
     const [data, setData] = React.useState(initial)
 
     const [ingredient, setIngredient] = React.useState()
@@ -26,7 +31,7 @@ const IngredientTable = ({ initial=[], onChange }) => {
         if (row) {
             row.quantity += quantity
         } else {
-            state.push({ingredient: ingredient, quantity: quantity})
+            state.push({ ingredient: ingredient, quantity: quantity })
         }
 
         setData(state)
@@ -50,11 +55,11 @@ const IngredientTable = ({ initial=[], onChange }) => {
     }
 
     const queryIngredients = async (filter = '') => {
-        const res = await fetch(`/api/manage/inventory/search?filter=${ filter }`, { method: "GET" })
+        const res = await fetch(`/api/manage/inventory/search?filter=${filter}`, { method: "GET" })
         const json = await res.json()
 
         return json.rows
-    }  
+    }
 
     return (
         <Table>
@@ -69,12 +74,12 @@ const IngredientTable = ({ initial=[], onChange }) => {
 
             <TableBody>
                 {data && data.map((row, index) => (
-                    <TableRow key={ index }>
-                        <TableCell>{ row.ingredient.name }</TableCell>
-                        <TableCell>{ row.quantity }</TableCell>
+                    <TableRow key={index}>
+                        <TableCell>{row.ingredient.name}</TableCell>
+                        <TableCell>{row.quantity}</TableCell>
                         <TableCell>
                             <IconButton variant="contained" color="secondary" onClick={handleDeleteRow(index)}>
-                                <ClearIcon/>
+                                <ClearIcon />
                             </IconButton>
                         </TableCell>
                     </TableRow>
@@ -83,24 +88,24 @@ const IngredientTable = ({ initial=[], onChange }) => {
                 <TableRow>
                     <TableCell>
                         <AutocompleteWithQuery
-                            onChange={ handleIngredient }
+                            onChange={handleIngredient}
                             renderInput={(params) => (
                                 <TextField {...params} label="Name" variant="outlined" />
                             )}
-                            query={ queryIngredients }
+                            query={queryIngredients}
                         />
                     </TableCell>
 
                     <TableCell>
                         <TextField
-                            sx={{width: 150}}
+                            sx={{ width: 150 }}
                             label="Quantity"
                             defaultValue={1}
                             inputProps={{
                                 min: 1,
                             }}
                             type="number"
-                            onChange={ handleQuantity }
+                            onChange={handleQuantity}
                             variant="outlined"
                         />
                     </TableCell>
@@ -108,7 +113,7 @@ const IngredientTable = ({ initial=[], onChange }) => {
                     <TableCell>
                         {(ingredient && quantity > 0) &&
                             <IconButton variant="contained" color="primary" onClick={handleAddRow}>
-                                <AddIcon/>
+                                <AddIcon />
                             </IconButton>
                         }
                     </TableCell>

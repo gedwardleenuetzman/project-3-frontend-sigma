@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: IngredientTable.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: IngredientTable.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+
+import { Table, TableBody, TableCell, TableHead, TableRow, TextField, IconButton, Autocomplete } from '@mui/material';
+import { Clear as ClearIcon, Add as AddIcon } from '@mui/icons-material';
+
+import AutocompleteWithQuery from 'src/AutocompleteWithQuery';
+
+/**
+ * 
+ * @param {*} param0 
+ * @returns The ingredient table query that is used to show the menu items for each page that it is called upon
+ */
+const IngredientTable = ({ initial = [], onChange }) => {
+    const [data, setData] = React.useState(initial)
+
+    const [ingredient, setIngredient] = React.useState()
+    const [quantity, setQuantity] = React.useState(1)
+
+    React.useEffect(() => {
+        onChange(data)
+    }, [data])
+
+    // React.useEffect(() => {
+    //     setData([ ...initial ])
+    // }, [initial])
+
+    const handleAddRow = () => {
+        let state = [...data]
+        const row = state.find((row) => row.ingredient.id == ingredient.id)
+
+        if (row) {
+            row.quantity += quantity
+        } else {
+            state.push({ ingredient: ingredient, quantity: quantity })
+        }
+
+        setData(state)
+    }
+
+    const handleDeleteRow = (index) => {
+        return () => {
+            let state = [...data]
+            state.splice(index, 1)
+
+            setData(state)
+        }
+    }
+
+    const handleIngredient = (event, option) => {
+        setIngredient(option)
+    }
+
+    const handleQuantity = (event) => {
+        setQuantity(parseInt(event.target.value))
+    }
+
+    const queryIngredients = async (filter = '') => {
+        const res = await fetch(`/api/manage/inventory/search?filter=${filter}`, { method: "GET" })
+        const json = await res.json()
+
+        return json.rows
+    }
+
+    return (
+        &lt;Table>
+
+            &lt;TableHead>
+                &lt;TableRow>
+                    &lt;TableCell>Name&lt;/TableCell>
+                    &lt;TableCell>Quantity&lt;/TableCell>
+                    &lt;TableCell>&lt;/TableCell>
+                &lt;/TableRow>
+            &lt;/TableHead>
+
+            &lt;TableBody>
+                {data &amp;&amp; data.map((row, index) => (
+                    &lt;TableRow key={index}>
+                        &lt;TableCell>{row.ingredient.name}&lt;/TableCell>
+                        &lt;TableCell>{row.quantity}&lt;/TableCell>
+                        &lt;TableCell>
+                            &lt;IconButton variant="contained" color="secondary" onClick={handleDeleteRow(index)}>
+                                &lt;ClearIcon />
+                            &lt;/IconButton>
+                        &lt;/TableCell>
+                    &lt;/TableRow>
+                ))}
+
+                &lt;TableRow>
+                    &lt;TableCell>
+                        &lt;AutocompleteWithQuery
+                            onChange={handleIngredient}
+                            renderInput={(params) => (
+                                &lt;TextField {...params} label="Name" variant="outlined" />
+                            )}
+                            query={queryIngredients}
+                        />
+                    &lt;/TableCell>
+
+                    &lt;TableCell>
+                        &lt;TextField
+                            sx={{ width: 150 }}
+                            label="Quantity"
+                            defaultValue={1}
+                            inputProps={{
+                                min: 1,
+                            }}
+                            type="number"
+                            onChange={handleQuantity}
+                            variant="outlined"
+                        />
+                    &lt;/TableCell>
+
+                    &lt;TableCell>
+                        {(ingredient &amp;&amp; quantity > 0) &amp;&amp;
+                            &lt;IconButton variant="contained" color="primary" onClick={handleAddRow}>
+                                &lt;AddIcon />
+                            &lt;/IconButton>
+                        }
+                    &lt;/TableCell>
+
+                &lt;/TableRow>
+
+            &lt;/TableBody>
+        &lt;/Table>
+    );
+};
+
+export default IngredientTable</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AutocompleteWithQuery">AutocompleteWithQuery</a></li><li><a href="global.html#Counter">Counter</a></li><li><a href="global.html#IngredientDialog">IngredientDialog</a></li><li><a href="global.html#IngredientTable">IngredientTable</a></li><li><a href="global.html#ShoppingCart">ShoppingCart</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 21:09:35 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,12 +1,18 @@
 import * as Models from "sql/models"
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * Removes the item in the table dependent on the id that is given through functions throughout the project
+ */
 export default async function handler(req, res) {
     if (req.method === 'PUT') {
         const { id } = req.body;
         const item = await Models.Ingredients.findByPk(id);
 
         if (item) {
-            await item.update({ 
+            await item.update({
                 enabled: false
             });
 

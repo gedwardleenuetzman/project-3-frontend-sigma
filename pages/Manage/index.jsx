@@ -7,32 +7,37 @@ import RouteDetailer from 'src/RouteDetailer'
 
 import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
+/**
+ * 
+ * @returns The manager page with buttons to different options
+ * 
+ */
 const Manage = () => {
     return (
         <React.Fragment>
-            <StandardAppBar title="Manage" layout={MANAGE_ROUTE_DRAWER_LAYOUT}/>
+            <StandardAppBar title="Manage" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
-            <Box sx={{m: 4}}>
+            <Box sx={{ m: 4 }}>
                 <RouteDetailer layout={[
-                    {  
-                        title: "Menu", 
-                        desc: "Manage menu by adding products and modifying attributes for them.", 
-                        route: "/Manage/Menu", 
+                    {
+                        title: "Menu",
+                        desc: "Manage menu by adding products and modifying attributes for them.",
+                        route: "/Manage/Menu",
                         image: ""
                     },
                     {
-                        title: "Inventory", 
-                        desc: "Manage inventory by adding creating and restocking ingredients.", 
-                        route: "/Manage/Inventory", 
+                        title: "Inventory",
+                        desc: "Manage inventory by adding creating and restocking ingredients.",
+                        route: "/Manage/Inventory",
                         image: ""
                     },
                     {
-                        title: "Reports", 
-                        desc: "Generate various reports detailing restaurant performance.", 
-                        route: "/Manage/Reports", 
+                        title: "Reports",
+                        desc: "Generate various reports detailing restaurant performance.",
+                        route: "/Manage/Reports",
                         image: ""
                     }
-                ]}/>
+                ]} />
             </Box>
         </React.Fragment>
     )

@@ -15,6 +15,11 @@ import createEmotionCache from '../src/createEmotionCache';
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
+/**
+ * 
+ * @param {*} props 
+ * @returns The React App
+ */
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, session } = props;
 

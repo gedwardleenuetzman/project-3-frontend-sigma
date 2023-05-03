@@ -3,6 +3,13 @@ import { Op } from "sequelize";
 
 const PAGE_SIZE = 10;
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * 
+ * Search for the item within the query tables
+ */
 export default async function handler(req, res) {
     if (req.method === "GET") {
         const { page = 1, filter = "" } = req.query;
@@ -15,8 +22,8 @@ export default async function handler(req, res) {
                         { name: { [Op.iLike]: `%${filter}%` } },
                     ],
                 },
-                { 
-                    enabled: true 
+                {
+                    enabled: true
                 }
             ]
         };
@@ -26,10 +33,10 @@ export default async function handler(req, res) {
         ]
 
         const result = await Models.Ingredients.findAndCountAll({
-            where: whereClause, 
+            where: whereClause,
             order: orderClause,
-            limit: PAGE_SIZE, 
-            offset: offset,  
+            limit: PAGE_SIZE,
+            offset: offset,
         });
 
         const pages = Math.ceil(result.count / PAGE_SIZE);

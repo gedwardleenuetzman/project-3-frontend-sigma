@@ -13,14 +13,20 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
 
     callbacks: {
-        async signIn({user}) {
+        /**
+         * 
+         * @param {*} user 
+         * @returns The proper access to the different pages in the application depend
+         * on the user that signs in
+         */
+        async signIn({ user }) {
             try {
                 const existingUser = await Models.Users.findOne({
                     where: {
                         email: user.email
                     }
                 });
-        
+
                 if (existingUser) {
                     return true;
 

@@ -3,6 +3,11 @@ import { Box, Drawer, IconButton, List, Divider, ListItem, ListItemButton, ListI
 import { useRouter } from 'next/router';
 import MenuIcon from '@mui/icons-material/Menu';
 
+/**
+ * 
+ * @param {*} props 
+ * @returns The drawer or layout for the route of items
+ */
 export default function RouteDrawer(props) {
     const anchor = 'left'
     const router = useRouter()
@@ -24,11 +29,11 @@ export default function RouteDrawer(props) {
                         {items.map((item, itemIndex) => (
                             <ListItem key={itemIndex} disablePadding>
                                 <ListItemButton href={item.route} selected={router.pathname.startsWith(item.route)}>
-                                    <ListItemText primary={item.text}/>
+                                    <ListItemText primary={item.text} />
                                 </ListItemButton>
                             </ListItem>
                         ))}
-                        <Divider/>
+                        <Divider />
                     </React.Fragment>
                 ))}
             </List>
@@ -38,7 +43,7 @@ export default function RouteDrawer(props) {
     return (
         <React.Fragment>
             <IconButton onClick={toggleDrawer(true)}>
-                <MenuIcon/>
+                <MenuIcon />
             </IconButton>
             <Drawer anchor={anchor} open={open} onClose={toggleDrawer(false)}>
                 {list()}

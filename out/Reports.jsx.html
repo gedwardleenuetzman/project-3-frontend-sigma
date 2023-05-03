@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Reports.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Reports.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { Button, withTheme } from '@mui/material'
+import StandardAppBar from 'src/StandardAppBar'
+import { Box, Typography } from '@mui/material';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
+
+const styles = {
+	dropdown: {
+		border: 'none',
+		background: 'inherit',
+		color: 'white',
+		size: 'auto',
+		padding: '10px',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		fontSize: '16px',
+		'&amp;:before': { borderBottom: 'none' },
+		'&amp;:after': { borderBottom: 'none' },
+		'&amp;:hover:not(.Mui-disabled):before': { borderBottom: 'none' },
+		'&amp;.Mui-focused:before': { borderBottom: 'none' },
+		textAlign: 'center',
+		webkitAlign: 'center',
+		// appearance: 'none',
+	},
+
+	option: {
+		background: '#303030',
+		color: 'white',
+		fontSize: '10px',
+		MozAppearance: 'none',
+	}
+}
+
+// Define the fade-in animation
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+// Define a styled component for the box that uses the fade-in animation
+const FadeInBox = styled(Box)`
+  animation: ${fadeIn} 1s ease-in-out;
+`;
+
+/**
+ * 
+ * @returns The drop down menu for easy navigation
+ */
+const DropdownMenu = () => {
+	const [selected, setSelected] = React.useState('ZReport');
+
+	const handleSelect = (event) => {
+		setSelected(event.target.value);
+	};
+
+	return (
+		&lt;React.Fragment>
+			&lt;StandardAppBar title="Z Report" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+
+			&lt;div>
+				&lt;div style={{ padding: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+					&lt;select value={selected} onChange={handleSelect} style={styles.dropdown}>
+						&lt;option value="XZReport" style={styles.option}>Z Report and X Report&lt;/option>
+						&lt;option value="block2" style={styles.option}>Excess Report&lt;/option>
+						&lt;option value="block3" style={styles.option}>Sales Report&lt;/option>
+					&lt;/select>
+				&lt;/div>
+
+				{selected === 'ZReport' &amp;&amp; &lt;XZReport />}
+				{selected === 'block2' &amp;&amp; &lt;ExcessReport />}
+				{selected === 'block3' &amp;&amp; &lt;Block3 />}
+			&lt;/div>
+
+		&lt;/React.Fragment>
+	);
+}
+
+/**
+ * 
+ * @returns The XZ reports for the manager side, fetches the call that the client gives
+ */
+const XZReport = () => {
+	const [content, setContent] = React.useState(0);
+	const [zshowBox, setZShowBox] = React.useState(false);
+	const [znullBox, setZNullBox] = React.useState(false);
+	const [xshowBox, setXShowBox] = React.useState(false);
+	const [xnullBox, setXNullBox] = React.useState(false);
+
+	async function Zfetch() {
+		try {
+			const response = await fetch('/api/manage/reports/zreport/totalprice', { method: 'GET' })
+			const data = await response.json();
+			setContent(data);
+			console.log(data);
+		}
+		catch (error) {
+			console.error(error);
+		}
+
+		if (content) {
+			setZShowBox(true);
+			setZNullBox(false);
+		}
+		else {
+			setZNullBox(true);
+			setZShowBox(false);
+		}
+	}
+
+	async function Xfetch() {
+		try {
+			const response = await fetch('/api/manage/reports/xreport/totalprice', { method: 'GET' })
+			const data = await response.json();
+			setContent(data);
+			console.log(data);
+		}
+		catch (error) {
+			console.error(error);
+		}
+
+		if (content) {
+			setXShowBox(true);
+			setXNullBox(false);
+		}
+		else {
+			setXNullBox(true);
+			setXShowBox(false);
+		}
+	}
+
+	return (
+		&lt;React.Fragment>
+			&lt;FadeInBox sx={{ m: 2 }}>
+				&lt;StandardAppBar title="Z Report" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+
+				&lt;Typography variant="h5" component="h1">
+					Z Report Generation:
+				&lt;/Typography>
+				&lt;Box sx={{ m: 4, display: 'flex' }}>
+					&lt;Button sx={{ ml: 2 }} variant="outlined" onClick={() => { Zfetch() }}>Generate&lt;/Button>
+				&lt;/Box>
+
+				{zshowBox &amp;&amp; (
+					&lt;FadeInBox sx={{ m: 2 }}>
+						&lt;Typography variant="h5" component="h1">
+							The total for this Z reports sales is : {content}.
+						&lt;/Typography>
+					&lt;/FadeInBox>
+				)}
+
+				{znullBox &amp;&amp; (
+					&lt;FadeInBox sx={{ m: 2 }}>
+						&lt;Typography variant="h5" component="h1">
+							Error in displaying the Z report, value is most likely NULL.
+						&lt;/Typography>
+					&lt;/FadeInBox>
+				)}
+
+				&lt;Typography variant="h5" component="h1">
+					X Report Generation:
+				&lt;/Typography>
+				&lt;Box sx={{ m: 4, display: 'flex' }}>
+					&lt;Button sx={{ ml: 2 }} variant="outlined" onClick={() => { Xfetch() }}>Generate&lt;/Button>
+				&lt;/Box>
+
+				{xshowBox &amp;&amp; (
+					&lt;FadeInBox sx={{ m: 2 }}>
+						&lt;Typography variant="h5" component="h1">
+							The total for this X reports sales is : {content}.
+						&lt;/Typography>
+					&lt;/FadeInBox>
+				)}
+
+				{xnullBox &amp;&amp; (
+					&lt;FadeInBox sx={{ m: 2 }}>
+						&lt;Typography variant="h5" component="h1">
+							Error in displaying the X report, value is most likely NULL.
+						&lt;/Typography>
+					&lt;/FadeInBox>
+				)}
+			&lt;/FadeInBox>
+
+		&lt;/React.Fragment>
+	)
+}
+
+
+
+export default DropdownMenu</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#DropdownMenu">DropdownMenu</a></li><li><a href="global.html#Manage">Manage</a></li><li><a href="global.html#UpdateInventory">UpdateInventory</a></li><li><a href="global.html#XZReport">XZReport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 21:38:03 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

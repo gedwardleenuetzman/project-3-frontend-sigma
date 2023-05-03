@@ -4,6 +4,10 @@ import Logout from '@mui/icons-material/Logout';
 
 import { useSession, signIn, signOut, getSession } from "next-auth/react"
 
+/**
+ * 
+ * @returns The account menu
+ */
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null)
     const { data: session, status } = useSession()
@@ -19,7 +23,7 @@ export default function AccountMenu() {
     };
 
     return (
-        <React.Fragment>    
+        <React.Fragment>
             {status == "authenticated" ? (
                 <React.Fragment>
                     <IconButton onClick={handleClick}>
@@ -27,8 +31,8 @@ export default function AccountMenu() {
                     </IconButton>
                     <Menu anchorEl={anchorEl} open={open} onClose={handleClose} onClick={handleClose}>
                         <MenuItem onClick={handleClose}>{session.user.email}</MenuItem>
-                        <Divider/>
-                        <MenuItem onClick={() => {handleClose(); signOut();}}>
+                        <Divider />
+                        <MenuItem onClick={() => { handleClose(); signOut(); }}>
                             <ListItemIcon>
                                 <Logout fontSize="small" />
                             </ListItemIcon>
@@ -41,6 +45,6 @@ export default function AccountMenu() {
                     Login
                 </Button>
             )}
-        </React.Fragment> 
+        </React.Fragment>
     )
 }

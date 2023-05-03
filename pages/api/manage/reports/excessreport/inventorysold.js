@@ -1,28 +1,35 @@
 import orderProducts from "sql/models/orderProducts"
 import Ingredients from "sql/models/ingredients"
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns The inventory that is sold depending on the function that it is used in.
+ */
 export default async function handler(req, res) {
-    if(req.method === "GET"){
+    if (req.method === "GET") {
         try {
-            const {start, end} = req.body;
+            const { start, end } = req.body;
 
             const where = {
                 from: {
-                $between: [start, end],
-            }}
+                    $between: [start, end],
+                }
+            }
 
             const orderproducts = await orderProducts.findAll({
-                where: {where},
+                where: { where },
             });
 
 
-            for(const order of orderproducts){
+            for (const order of orderproducts) {
 
             }
 
 
             res.send();
-        } catch(error) {
+        } catch (error) {
             console.error('Error:', error);
             res.status(500).send(error);
         }

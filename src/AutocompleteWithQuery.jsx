@@ -1,6 +1,11 @@
 import React from 'react';
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns Automatically complete query
+ */
 const AutocompleteWithQuery = ({ query, onChange }) => {
   const [open, setOpen] = React.useState(false)
   const [options, setOptions] = React.useState([])
@@ -30,14 +35,14 @@ const AutocompleteWithQuery = ({ query, onChange }) => {
 
   return (
     <Autocomplete
-      sx={{width: 250}}
+      sx={{ width: 250 }}
       open={open}
       onOpen={handleOpen}
       onClose={handleClose}
       options={options}
       loading={loading}
       getOptionLabel={(option) => option.name}
-      onChange={ onChange }
+      onChange={onChange}
       renderInput={(params) => (
         <TextField
           {...params}
