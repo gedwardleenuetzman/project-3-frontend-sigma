@@ -46,8 +46,6 @@ export default function Home() {
             ]}>
             </RouteDrawer>
 
-        <div id="google_translate_element"></div>
-
             <div className="home-page">
                 <div className="logo">
                     <p align="center">
@@ -76,6 +74,9 @@ export default function Home() {
 
 
                 </div>
+
+                <div id="google_translate_element"></div>
+
             </div >
         </React.Fragment >
     );
