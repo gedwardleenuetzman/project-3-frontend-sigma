@@ -1,0 +1,161 @@
+Appendix 1: SCRUM Meeting Agendas and Minutes
+
+SCRUM Meeting 1 for Project 3 Sigma
+Prepared by: Garrison Nuetzmann
+Meeting Date: 4/26
+Meeting Attendees
+ Garrison Nuetzmann
+ Ozzie Aguirra
+ Prithvi Patel
+ Ralph Vicente
+Meeting Agenda Items
+Discuss user study feedback
+Plan final sprint
+Status Update Since Last Meeting
+Accomplishments:
+ Final user study completed and submitted
+Expert Panel completed and submitted
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Complete user study and expert panel writeups and synthesis
+Garrison
+Yes
+Collect Expert and User data and feedback
+Garrison, Prithvi, Ralph, Ozzie
+Yes
+
+Before The Next Meeting
+Plans:
+Complete base functionality of user panels
+Be able to order and verify database is being used correctly
+
+Task Assignments:
+Task Description
+Assigned to
+Implement Google Maps API on Homepage
+Ozzie
+Rewrite order placing backend code
+Garrison
+Rewrite report generation backend code
+Ralph
+Implement customer ordering page differences 
+Prithvi
+
+Minutes from Previous Meeting
+N/A
+
+
+SCRUM Meeting 2 for Project 3 Sigma
+Prepared by: Garrison Nuetzmann
+Meeting Date: 4/28
+Meeting Attendees
+ Garrison
+ Prithvi
+ Ozzie
+ Ralph
+Meeting Agenda Items
+Discuss/Update on sprint goals
+Refactor assignments/plan helping with issues
+Status Update Since Last Meeting
+Accomplishments:
+Ordering code on the backend has been rewritten for new code base
+Report logic on the backend has been rewritten for new code base
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Implement google maps API on Homepage
+Ozzie
+In progress
+Rewrite order placing backend code
+Garrison
+In progress
+Rewrite report generation backend code
+Ralph
+In progress
+Implement customer ordering page differences
+Prithvi
+In progress
+
+Before The Next Meeting
+Plans:
+Continue implementation of current tasks
+Try not to cry
+
+Task Assignments:
+Task Description
+Assigned to
+Implement google maps API on Homepage
+Ozzie
+Rewrite order placing backend code
+Garrison
+Rewrite report generation backend code
+Ralph
+Implement customer ordering page differences
+Prithvi
+
+Minutes from Previous Meeting
+During the previous meeting we discussed the results of our final user studies, including the expert panel, and decided how to move forward with the final stages of the project in sprint 3. We assigned major task areas to each team member and decided what feature sets and feedback would be our main priority in the final sprint. Tasks were assigned and a couple of features were canceled or reworked.
+
+
+SCRUM Meeting 3 for Project 3 Sigma
+Prepared by: Garrison Nuetzmann
+Meeting Date: 5/1
+Meeting Attendees
+ Garrison Nuetzmann
+ Prithvi Patel
+ Ralph Vicente
+ Ozzie Aguirre
+Meeting Agenda Items
+ Final push of sprint 3, completion of features
+Status Update Since Last Meeting
+Accomplishments:
+ Still working on making sure everything works
+Honestly nothing is done quite yet
+
+Tasks Completed:
+Task Description
+Assigned to
+Completed? (yes/no)
+Implement google maps API on Homepage
+Ozzie
+In progress
+Rewrite order placing backend code
+Garrison
+In progress
+Rewrite report generation backend code
+Ralph
+In progress
+Implement customer ordering page differences
+Prithvi
+In progress
+
+Before The Next Meeting
+Plans:
+ Finish the sprint features and the project code on Tuesday
+Get it turned in and prepare for the presentation
+
+Task Assignments:
+Task Description
+Assigned to
+Implement google maps API on Homepage
+Ozzie
+Rewrite order placing backend code
+Garrison
+Rewrite report generation backend code
+Ralph
+Implement customer ordering page differences
+Prithvi
+Prepare the sprint written materials
+Garrison
+Prepare the sprint code documentation
+Ozzie
+Get the project code fully hosted and operational
+Garrison
+
+Minutes from Previous Meeting
+During the previous meeting we discussed what to do going forward about the final few features of the project, the crunch to get them completed on time, and how to assist each other in the final stages. The tasks assigned remained the same; we just had to continue working on them and get them done. A couple of new tasks were upcoming such as the documentation of the code but we wanted to fully implement all aspects of the MVP first.
