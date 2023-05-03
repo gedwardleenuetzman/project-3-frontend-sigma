@@ -2,7 +2,7 @@ import NextAuth from "next-auth/next"
 import GoogleProvider from "next-auth/providers/google"
 import * as Models from "sql/models"
 
-export default NextAuth({
+export const authOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
@@ -43,4 +43,6 @@ export default NextAuth({
             }
         }
     }
-})
+}
+
+export default NextAuth(authOptions)
