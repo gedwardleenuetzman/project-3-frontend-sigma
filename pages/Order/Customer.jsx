@@ -2,21 +2,21 @@ import React from 'react';
 
 import { Pagination, Grid, Box, Button } from '@mui/material'
 
+import * as Models from "sql/models"
+
 import StandardAppBar from 'src/StandardAppBar'
 import SearchBar from 'src/SearchBar'
 import CartDrawer from 'src/CartDrawer'
 import SearchCard from 'src/SearchCard'
 
-const DRAWER_LAYOUT = [
-    [{ text: "Home", route: "/Home" }],
-    [{ text: "Customer Ordering", route: "/CustomerOrder" }],
-    [{ text: "Manage", route: "/Manage" }],
-]
+import { getSession } from "next-auth/react"
+
+import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
 const fetchContent = async (filter, page) =>
 	await (await fetch(`/api/manage/menu/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
 
-const PlaceOrder = () => {
+const PlaceOrder = ({ tags }) => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
@@ -98,7 +98,7 @@ const PlaceOrder = () => {
 
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Place Order" layout={DRAWER_LAYOUT}>
+			<StandardAppBar tags={tags} title="Place Order" layout={MANAGE_ROUTE_DRAWER_LAYOUT}>
 				<CartDrawer 
 					order={ order } 
 					onIncrement={incrementOrder}
@@ -141,5 +141,35 @@ const PlaceOrder = () => {
 		</React.Fragment>
 	)
 }
+
+export async function getServerSideProps(context) {
+	const session = await getSession(context);
+  
+	if (!session) {
+	  return {
+		props: {
+		  tags: [],
+		}
+	  };
+	}
+  
+	const user = await Models.Users.findOne({ where: { email: session.user.email } })
+  
+	let tags = []
+  
+	if (user.manager_permissions) {
+	  tags.push('manage')
+	}
+  
+	if (user.server_permissions) {
+	  tags.push('server')
+	}
+  
+	return {
+	  props: {
+		tags: tags,
+	  },
+	};
+  }
 
 export default PlaceOrder
