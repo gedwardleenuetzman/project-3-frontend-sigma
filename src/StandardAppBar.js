@@ -7,13 +7,15 @@ import RouteDrawer from 'src/RouteDrawer'
 const StandardAppBar = ({ layout, title, children }) => {
     return (
         <React.Fragment>
-            <AppBar position="fixed">
+            <AppBar position="static">
                 <Toolbar>
                     <RouteDrawer layout={ layout }/>
 
                     <Typography variant="h6" component="div" sx={{ pl: 3, flexGrow: 1 }}>
                         { title }
                     </Typography>
+                    
+                    <div id="google_translate_element"></div>
 
                     <AccountMenu/>
 
@@ -22,7 +24,7 @@ const StandardAppBar = ({ layout, title, children }) => {
                 </Toolbar>
             </AppBar>
 
-            <Toolbar/>
+            
         </React.Fragment>
     );
 }

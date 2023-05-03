@@ -2,7 +2,7 @@ const MANAGE_ROUTE_DRAWER_LAYOUT = [
 	[
         {
             text: "Home", 
-            route: "/Home"
+            route: "/"
         }
     ],
 	[

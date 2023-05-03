@@ -6,9 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import { SessionProvider } from "next-auth/react"
 import theme from '../src/theme';
-import styles from './Order';
-import image from './cfaLogo.png';
-import '../src/styles/home.module.css'
 
 import createEmotionCache from '../src/createEmotionCache';
 
@@ -18,6 +15,27 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, session } = props;
 
+  React.useEffect(() => {
+    const script = document.createElement('script');
+
+    script.type = 'text/javascript';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = false;
+
+    document.body.appendChild(script);
+   
+    window.googleTranslateElementInit = () => {
+      const googleTranslateElement = document.getElementById('google_translate_element');
+      googleTranslateElement.innerHTML = '';
+      new window.google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    };
+  
+    return () => {
+      document.body.removeChild(script);
+      delete window.googleTranslateElementInit;
+    }
+  }, []);
+
   return (
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
@@ -26,7 +44,9 @@ export default function MyApp(props) {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          
           <Component {...pageProps} />
+          
         </ThemeProvider>
       </CacheProvider>
     </SessionProvider>
