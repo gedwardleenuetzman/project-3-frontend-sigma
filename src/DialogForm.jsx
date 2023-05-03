@@ -1,6 +1,11 @@
 import React from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 
+/**
+ * 
+ * @param {*} children, open, title, layout, actions, onAction, onClode, initial
+ * @returns 
+ */
 const IngredientDialog = ({ children, open, title, layout, actions, onAction, onClose, initial }) => {
     const [form, setForm] = React.useState({})
 

@@ -1,6 +1,11 @@
 import React from 'react';
 import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns Automatically complete query
+ */
 const AutocompleteWithQuery = ({ query, onChange }) => {
   const [open, setOpen] = React.useState(false)
   const [options, setOptions] = React.useState([])

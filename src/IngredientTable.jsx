@@ -5,6 +5,12 @@ import { Clear as ClearIcon, Add as AddIcon } from '@mui/icons-material';
 
 import AutocompleteWithQuery from 'src/AutocompleteWithQuery';
 
+/**
+ * 
+ * @param {*} initial 
+ * @param {*} onChange
+ * @returns The ingredient table query that is used to show the menu items for each page that it is called upon
+ */
 const IngredientTable = ({ initial=[], onChange }) => {
     const [data, setData] = React.useState(initial)
 

@@ -4,6 +4,14 @@ import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
 import AccountMenu from 'src/AccountMenu'
 import RouteDrawer from 'src/RouteDrawer'
 
+/**
+ * 
+ * @param {*} layout 
+ * @param {*} title
+ * @param {*} children
+ * 
+ * @returns The setup for each page with its different divs
+ */
 const StandardAppBar = ({ layout, title, children }) => {
     return (
         <React.Fragment>

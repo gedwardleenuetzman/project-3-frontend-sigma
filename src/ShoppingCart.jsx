@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 
+/**
+ * 
+ * @param {*} Name
+ * @param {*} price  
+ * @returns The shopping cart functionality for the checkout on both server and customer
+ */
 function ShoppingCart({ name, price }) {
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(price);

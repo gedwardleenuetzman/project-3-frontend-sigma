@@ -4,6 +4,10 @@ import Logout from '@mui/icons-material/Logout';
 
 import { useSession, signIn, signOut, getSession } from "next-auth/react"
 
+/**
+ * 
+ * @returns The account menu
+ */
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null)
     const { data: session, status } = useSession()

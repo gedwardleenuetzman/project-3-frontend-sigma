@@ -2,6 +2,16 @@ import * as React from 'react';
 
 import { Card, CardActions, CardContent, Button, Typography, CardMedia } from '@mui/material'
 
+/**
+ * 
+ * @param {*} desc
+ * @param {*} title
+ * @param {*} image
+ * @param {*} children
+ * @param {*} onClick
+ * 
+ * @returns Provides different option based on the click
+ */
 export default function OptionCard({desc, title, image, children, onClick}) {
 	const handleClick = (action) => {
 		if (onClick) {

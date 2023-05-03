@@ -2,6 +2,15 @@ import * as React from 'react';
 
 import { Box, Card, CardActions, CardContent, CardMedia, Typography, Button } from '@mui/material'
 
+/**
+ * 
+ * @param {*} name  
+ * @param {*} description  
+ * @param {*} image  
+ * @param {*} actions  
+ * @param {*} onAction  
+ * @returns The search card for the individual item
+ */
 export default function SearchCard({ name, description, image, actions, onAction }) {
   const handleAction = (action) => {
     return () => {

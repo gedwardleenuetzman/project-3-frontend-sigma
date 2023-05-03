@@ -2,6 +2,12 @@ import * as React from "react";
 import { InputBase, IconButton, Paper } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
   
+/**
+ * 
+ * @param {*} placeholder
+ * @param {*} onSearch
+ * @returns The ability to use the search bar returns the item that is searched for
+ */
 function SearchBar({ placeholder, onSearch }) {
     const [value, setValue] = React.useState("");
 

@@ -34,7 +34,12 @@ const CREATE_DIALOG_INITIAL = {
 
 const fetchContent = async (filter, page) => 
 	await (await fetch(`/api/manage/inventory/search?filter=${ filter }&page=${ page }`, { method: "GET" })).json()
-	
+
+
+/**
+ * 
+ * @returns The excess report depending on the orders provided.
+ */
 const UpdateInventory = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")

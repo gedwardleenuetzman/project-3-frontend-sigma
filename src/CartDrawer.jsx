@@ -6,6 +6,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns Counter for the checkout cart
+ */
 const Counter = ({ value, onIncrement, onDecrement }) => {
     const handleOnClick = (fn) => (event) => {
         event.stopPropagation();
@@ -29,6 +34,14 @@ const Counter = ({ value, onIncrement, onDecrement }) => {
     )
 }
 
+/**
+ * 
+ * @param {*} order
+ * @param {*} onIncrement
+ * @param {*} onDecrement
+ * @param {*} onOrder
+ * @returns The layout (drawer) for the cart side menu
+ */
 export default function CartDrawer({ order, onIncrement, onDecrement, onOrder }) {
     const anchor = 'right'
     const [open, setOpen] = React.useState(false)

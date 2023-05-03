@@ -4,6 +4,11 @@ import { Grid, Button } from '@mui/material'
 
 import OptionCard from 'src/OptionCard'
 
+/**
+ * 
+ * @param {*} props 
+ * @returns The detailed route the grid container
+ */
 export default function RouteDetailer(props) {
     return (
 		<Grid 
