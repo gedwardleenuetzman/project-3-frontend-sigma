@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Card, CardActions, CardContent, Button, Typography, CardMedia } from '@mui/material'
+import { Card, CardActions, CardContent, Button, Typography, CardMedia, Paper } from '@mui/material'
 
 export default function OptionCard({desc, title, image, children, onClick}) {
 	const handleClick = (action) => {
@@ -11,14 +11,18 @@ export default function OptionCard({desc, title, image, children, onClick}) {
 
 	return (
 		<Card sx={{ maxWidth: 345 }}>
-			{image && <CardMedia
-				component="img"
-				alt="green iguana"
-				height="140"
-				image={ image }
-				sx={{p: 1}}
-				style={{ objectFit: "contain" }}
-			/>}
+			{image && 
+				<Paper elevation={3}>
+					<CardMedia
+						component="img"
+						alt="green iguana"
+						height="140"
+						image={ image }
+						sx={{p: 1}}
+						style={{ objectFit: "contain" }}
+					/>
+				</Paper>
+			}
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="div">
 					{ title }
