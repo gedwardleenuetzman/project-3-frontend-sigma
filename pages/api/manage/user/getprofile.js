@@ -4,8 +4,7 @@ import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { getServerSession } from "next-auth/next"
 
 export default async function handler(req, res) {
-    if (req.method === 'POST') {
-        const { name, image, threshold, quantity } = req.body;
+    if (req.method === 'GET') {
         const session = await getServerSession(req, res, authOptions)
 
         if (!session) {
@@ -13,19 +12,13 @@ export default async function handler(req, res) {
         }
       
         const user = await Models.Users.findOne({ where: { email: session.user.email } })
-      
-        if (!user.manager_permissions) {
-            return res.status(401).json({ error: 'Only managers have access to this resource '})
+
+        console.log(user.toJSON())
+        if (user) {
+            res.status(200).json(user.toJSON());
+        } else {
+            res.status(404).json({ message: 'Profile not found' });
         }
-
-        await Models.Ingredients.create({ 
-            name: name,
-            image: image,
-            threshold: threshold,
-            quantity: quantity,
-        });
-
-        res.status(201).json({ message: 'Ingredient created successfully' });
     } else {
         res.status(405).json({ message: 'Method not allowed' });
     }

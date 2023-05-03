@@ -12,7 +12,13 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'You must be authenticated to access this resource.' });
     }
 
-    const server_id = (await Models.Users.findOne({ where: { email: session.user.email } })).id
+    const user = await Models.Users.findOne({ where: { email: session.user.email } })
+
+    if (!user.server_permissions) {
+      return res.status(401).json({ error: 'Only servers have access to this resource '})
+    }
+
+    const server_id = user.id
     const t = await db.transaction();
 
     try {
