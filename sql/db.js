@@ -7,6 +7,7 @@ const db = new Sequelize({
     password: process.env.PG_SQL_PASSWORD,
     host: process.env.PG_SQL_HOST,
     dialect: process.env.PG_SQL_DIALECT,
+    dialectModule: require('pg'),
 });
 
 export default db
