@@ -28,7 +28,7 @@ export const authOptions = {
                     await Models.Users.create({
                         name: user.name,
                         email: user.email,
-                        manager_permissions: true,
+                        manager_permissions: false,
                         server_permissions: false,
                     });
 
