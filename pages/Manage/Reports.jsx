@@ -8,6 +8,18 @@ import { useState, useEffect } from "react";
 
 import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
+const saveToFile = (filename, text) => {
+	if (typeof window !== 'undefined') {
+		const element = document.createElement("a");
+		const file = new Blob([text], { type: "text/plain" });
+		element.href = URL.createObjectURL(file);
+		element.download = filename;
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
+	  }
+};
+
 const styles = {
 	dropdown:{
 		border: 'none',
@@ -50,6 +62,10 @@ const fadeIn = keyframes`
 const FadeInBox = styled(Box)`
   animation: ${fadeIn} 1s ease-in-out;
 `;
+
+const handleSaveClick = (filename, text) => {
+	saveToFile(filename, text);
+};
 
 const DropdownMenu = () => {
 	const [selected, setSelected] = React.useState('XZReport');
@@ -210,9 +226,18 @@ const ExcessReport = () => {
 		setIsGenerated(true);
 	};
 
-	const printExcessData = () => {
-		console.log(JSON.stringify(excessData));
-	};
+	function compileTableData(excessData) {
+		const dataStrings = [];
+	  
+		excessData.forEach((item) => {
+		  if (item.excessPercentage < 0.1) {
+			const rowString = `${item.name}: ${item.excessPercentage * 100}%`;
+			dataStrings.push(rowString);
+		  }
+		});
+	  
+		return dataStrings;
+	}
 
 	useEffect(() => {
 		if (isGenerated) {
@@ -246,6 +271,11 @@ const ExcessReport = () => {
 		<Typography variant="h5" component="h1">
 				Excess Report Generation:
 		</Typography>
+
+		<Button onClick={() => handleSaveClick('Report.txt', compileTableData(excessData))}>
+			Export
+		</Button>
+
 		<div>
 			<label htmlFor="startDate">
 				Start Date: 
@@ -326,12 +356,25 @@ const SalesReport = () => {
 		console.log("End Date", event.target.value);
 	};
 
+	function compileSalesData(salesData) {
+		const dataStrings = salesData.map(
+		  (item) =>
+			`${item.name}: ${item.totalQuantity} sold $${item.totalPrice} earned`
+		);
+		return dataStrings;
+	  }
+
 	return (
 		<FadeInBox style={{padding: '10px'}}>
 		<div>
 		<Typography variant="h5" component="h1">
 				Sales Report Generation:
 		</Typography>
+
+		<Button onClick={() => handleSaveClick('Report.txt', compileSalesData(salesData))}>
+			Export
+		</Button>
+
 		<div>
 			<label htmlFor="startDate">
 				Start Date: 
@@ -399,12 +442,29 @@ const RestockReport = () => {
 		fetchSalesReport();
 	}
 
+	function compileRestockData(restockData) {
+		const data = restockData.filter(item => item.quantity < item.threshold);
+	  
+		const rows = data.map(item => {
+		  const name = item.name;
+		  const quantity = item.quantity;
+		  const threshold = item.threshold;
+		  return `${name} - Quantity: ${quantity} Threshold: ${threshold}`;
+		});
+	  
+		return rows;
+	  }
+
 	return (
 		<FadeInBox style={{padding: '10px'}}>
 		<div>
 		<Typography variant="h5" component="h1">
 				Restock Report Generation:
 		</Typography>
+
+		<Button onClick={() => handleSaveClick('Report.txt', compileRestockData(restockData))}>
+			Export
+		</Button>
 		
 		<ul>
 		<Button sx={{ ml: 2 }} variant="outlined" onClick={handleGenerateClick}>Generate</Button>
