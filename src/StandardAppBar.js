@@ -5,6 +5,8 @@ import AccountMenu from 'src/AccountMenu'
 import RouteDrawer from 'src/RouteDrawer'
 
 const StandardAppBar = ({ tags, layout, title, children }) => {
+    console.log('sab', tags)
+    
     return (
         <React.Fragment>
             <AppBar position="static">

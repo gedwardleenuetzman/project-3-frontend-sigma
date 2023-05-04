@@ -41,6 +41,16 @@ const UpdateInventory = () => {
 		fetchContent(filter, page).then(setContent)
 	}, [filter, page, count]);
 
+	const [tags, setTags] = React.useState([])
+
+	React.useEffect(() => {
+	  const fetchData = async () => {
+		setTags(await (await fetch(`/api/manage/user/gettags`)).json())
+	  }
+  
+	  fetchData()
+	}, [])
+
 	const onAction = (action, form) => {
 		setOpen(false)
 
@@ -68,7 +78,7 @@ const UpdateInventory = () => {
 
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Manage Inventory" tags={['manage']} layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+			<StandardAppBar title="Manage Inventory" tags={tags} layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
 			<DialogForm
 				open={open}

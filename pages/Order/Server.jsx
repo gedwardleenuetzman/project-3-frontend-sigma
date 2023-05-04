@@ -2,26 +2,32 @@ import React from 'react';
 
 import { Pagination, Grid, Box, Button } from '@mui/material'
 
-import * as Models from "sql/models"
-
 import StandardAppBar from 'src/StandardAppBar'
 import SearchBar from 'src/SearchBar'
 import CartDrawer from 'src/CartDrawer'
 import SearchCard from 'src/SearchCard'
-
-import { getSession } from "next-auth/react"
 
 import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
 const fetchContent = async (filter, page) =>
 	await (await fetch(`/api/manage/menu/search?filter=${filter}&page=${page}`, { method: "GET" })).json()
 
-const PlaceOrder = ({ tags }) => {
+const PlaceOrder = () => {
 	const [page, setPage] = React.useState(1)
 	const [filter, setFilter] = React.useState("")
 	const [content, setContent] = React.useState({})
 
 	const [order, setOrder] = React.useState([])
+
+	const [tags, setTags] = React.useState([])
+
+	React.useEffect(() => {
+	  const fetchData = async () => {
+		setTags(await (await fetch(`/api/manage/user/gettags`)).json())
+	  }
+  
+	  fetchData()
+	}, [])
 
 	React.useEffect(() => {
 		fetchContent(filter, page).then(setContent)
@@ -142,34 +148,34 @@ const PlaceOrder = ({ tags }) => {
 	)
 }
 
-export async function getServerSideProps(context) {
-	const session = await getSession(context);
+// export async function getServerSideProps(context) {
+// 	const session = await getSession(context);
   
-	if (!session) {
-	  return {
-		props: {
-		  tags: [],
-		}
-	  };
-	}
+// 	if (!session) {
+// 	  return {
+// 		props: {
+// 		  tags: [],
+// 		}
+// 	  };
+// 	}
   
-	const user = await Models.Users.findOne({ where: { email: session.user.email } })
+// 	const user = await Models.Users.findOne({ where: { email: session.user.email } })
   
-	let tags = []
+// 	let tags = []
   
-	if (user.manager_permissions) {
-	  tags.push('manage')
-	}
+// 	if (user.manager_permissions) {
+// 	  tags.push('manage')
+// 	}
   
-	if (user.server_permissions) {
-	  tags.push('server')
-	}
+// 	if (user.server_permissions) {
+// 	  tags.push('server')
+// 	}
   
-	return {
-	  props: {
-		tags: tags,
-	  },
-	};
-  }
+// 	return {
+// 	  props: {
+// 		tags: tags,
+// 	  },
+// 	};
+//   }
 
 export default PlaceOrder

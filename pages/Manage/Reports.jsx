@@ -58,9 +58,19 @@ const DropdownMenu = () => {
 		setSelected(event.target.value);
 	};
 
+	const [tags, setTags] = React.useState([])
+
+	React.useEffect(() => {
+	  const fetchData = async () => {
+		setTags(await (await fetch(`/api/manage/user/gettags`)).json())
+	  }
+  
+	  fetchData()
+	}, [])
+
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Manager Reports" layout={ MANAGE_ROUTE_DRAWER_LAYOUT }/>
+			<StandardAppBar tags={tags} title="Manager Reports" layout={ MANAGE_ROUTE_DRAWER_LAYOUT }/>
 			
       		<div>
 				<div style={{ padding: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

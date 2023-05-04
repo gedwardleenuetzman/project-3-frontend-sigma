@@ -8,9 +8,18 @@ import RouteDetailer from 'src/RouteDetailer'
 import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
 const Manage = () => {
+    const [tags, setTags] = React.useState([])
+
+    React.useEffect(() => {
+      const fetchData = async () => {
+        setTags(await (await fetch(`/api/manage/user/gettags`)).json())
+      }
+  
+      fetchData()
+    }, [])
     return (
         <React.Fragment>
-            <StandardAppBar title="Manage" layout={MANAGE_ROUTE_DRAWER_LAYOUT}/>
+            <StandardAppBar tags={tags} title="Manage" layout={MANAGE_ROUTE_DRAWER_LAYOUT}/>
 
             <Box sx={{m: 4}}>
                 <RouteDetailer layout={[

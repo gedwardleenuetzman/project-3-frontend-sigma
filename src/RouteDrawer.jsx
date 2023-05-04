@@ -16,7 +16,7 @@ export default function RouteDrawer(props) {
         setOpen(b)
     };
 
-    console.log(props.tags)
+    console.log('rd', props.tags)
 
     const list = () => (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>

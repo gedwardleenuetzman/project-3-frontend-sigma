@@ -18,26 +18,26 @@ const MANAGE_ROUTE_DRAWER_LAYOUT = [
         {
             text: "Manage", 
             route: "/Manage",
-            tags: ["manage"],
+            tags: ["manager"],
         }
     ],
 	[  
 		{
             text: "Inventory", 
             route: "/Manage/Inventory",
-            tags: ["manage"],
+            tags: ["manager"],
             showWhenRouteStartsWith: "/Manage",
         }, 
 		{
             text: "Menu", 
             route: "/Manage/Menu",
-            tags: ["manage"],
+            tags: ["manager"],
             showWhenRouteStartsWith: "/Manage",
         },
 		{
             text: "Reports", 
             route: "/Manage/Reports",
-            tags: ["manage"],
+            tags: ["manager"],
             showWhenRouteStartsWith: "/Manage",
         },
 	]

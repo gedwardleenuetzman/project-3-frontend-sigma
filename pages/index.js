@@ -1,17 +1,23 @@
 import React from 'react';
 
-import * as Models from "sql/models"
-
 import { Typography, Pagination, Grid, Box, Button, Container, Paper, Card } from '@mui/material'
 
 import StandardAppBar from 'src/StandardAppBar'
 import RouteDetailer from 'src/RouteDetailer'
 
-import { getSession } from "next-auth/react"
-
 import MANAGE_ROUTE_DRAWER_LAYOUT from 'src/DrawerLayouts/Manage'
 
-const Home = ({tags}) => {
+const Home = () => {
+  const [tags, setTags] = React.useState([])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      setTags(await (await fetch(`/api/manage/user/gettags`)).json())
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <React.Fragment>
       
@@ -58,34 +64,37 @@ const Home = ({tags}) => {
   )
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      props: {
-        tags: [],
-      }
-    };
-  }
+//   if (!session) {
+//     console.log('no sesh', session)
+//     return {
+//       props: {
+//         tags: [],
+//       }
+//     };
+//   }
 
-  const user = await Models.Users.findOne({ where: { email: session.user.email } })
+//   console.log('yes sesh')
 
-  let tags = []
+//   const user = await Models.Users.findOne({ where: { email: session.user.email } })
 
-  if (user.manager_permissions) {
-    tags.push('manage')
-  }
+//   let tags = []
 
-  if (user.server_permissions) {
-    tags.push('server')
-  }
+//   if (user.manager_permissions) {
+//     tags.push('manage')
+//   }
 
-  return {
-    props: {
-      tags: tags,
-    },
-  };
-}
+//   if (user.server_permissions) {
+//     tags.push('server')
+//   }
+
+//   return {
+//     props: {
+//       tags: tags,
+//     },
+//   };
+// }
 
 export default Home

@@ -53,6 +53,16 @@ const UpdateMenu = () => {
 		fetchContent(filter, page).then(setContent)
 	}, [filter, page, count]);
 
+	const [tags, setTags] = React.useState([])
+
+	React.useEffect(() => {
+	  const fetchData = async () => {
+		setTags(await (await fetch(`/api/manage/user/gettags`)).json())
+	  }
+  
+	  fetchData()
+	}, [])
+
 	const onAction = (action, form) => {
 		setOpen(false)
 
@@ -84,7 +94,7 @@ const UpdateMenu = () => {
 
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Manage Menu" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+			<StandardAppBar tags={tags} title="Manage Menu" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
 			<DialogForm
 				open={open}

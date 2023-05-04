@@ -4,8 +4,7 @@ import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { getServerSession } from "next-auth/next"
 
 export default async function handler(req, res) {
-    if (req.method === 'PUT') {
-        const { id } = req.body;
+    if (req.method === 'GET') {
         const session = await getServerSession(req, res, authOptions)
 
         if (!session) {
@@ -13,21 +12,20 @@ export default async function handler(req, res) {
         }
       
         const user = await Models.Users.findOne({ where: { email: session.user.email } })
-      
-        if (!user.manager_permissions) {
-            return res.status(401).json({ error: 'Only managers have access to this resource '})
+        let tags = []
+
+        if (user.manager_permissions) {
+            tags.push('manager')
         }
-        
-        const item = await Models.Products.findByPk(id);
 
-        if (item) {
-            await item.update({ 
-                enabled: false
-            });
+        if (user.server_permissions) {
+            tags.push('server')
+        }
 
-            res.status(200).json({ message: 'Product removed successfully' });
+        if (user) {
+            res.status(200).json(tags);
         } else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Profile not found' });
         }
     } else {
         res.status(405).json({ message: 'Method not allowed' });

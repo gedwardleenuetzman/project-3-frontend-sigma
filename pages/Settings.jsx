@@ -45,9 +45,19 @@ const Settings = () => {
         setState(form);
     };
 
+    const tags=[]
+
+    if (state.manager_permissions) {
+        tags.push('manager')
+    }
+
+    if (state.server_permissions) {
+        tags.push('server')
+    }
+
 	return (
 		<React.Fragment>
-			<StandardAppBar title="Settings" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
+			<StandardAppBar tags={tags} title="Settings" layout={MANAGE_ROUTE_DRAWER_LAYOUT} />
 
             <Box sx={{m: 2}}>
                 <Card sx={{mb: 2, pl: 2, pt: 1, pb: 1 }}>
